@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- <link rel="icon" href="<%= BASE_URL %>favicon.ico"> -->
-    AIzaSyDB4XahmDBU2vfMiZk4Auw_odUh9OIF7q0
+    <!-- <link rel="icon" href="<%= BASE_URL %>favicon.ico"> 
+    AIzaSyDB4XahmDBU2vfMiZk4Auw_odUh9OIF7q0-->
 
-    <title>Offer-x, prva profesionalna platforma za šopove i dobavljače</title>
+    <title>Benja profesional app</title>
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset(mix('css/main.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('css/iconfont.css')) }}">
