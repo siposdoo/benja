@@ -26,7 +26,7 @@ $this->validate($request, [
 'password' => 'required|min:6',
 ]);
 $user = new User();
-$user->displayName = $request->displayName;
+$user->name = $request->displayName;
 $user->email = $request->email;
 $user->password = bcrypt($request->password);
 $user->save();
