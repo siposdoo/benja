@@ -1363,7 +1363,7 @@ const router = new Router({
           meta: {
             allowAnonymous: true
             , 
-            rule: 'superpublicadmin'
+            rule: 'public'
           }
         },
         {
