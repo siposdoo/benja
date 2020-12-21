@@ -13,11 +13,12 @@ class AddNewUserFields extends Migration
      */
     public function up()
     {  
-        Schema::table('users', function (Blueprint $table) {
+       /*  Schema::table('users', function (Blueprint $table) {
             $table->string('userRole')->default("8144a36f88b8c47153a0db9fb1619d101")->after('id');
             $table->string('about')->default("Korisnik nije unio podatke")->after('userRole');
             $table->string('photoURL')->default("/images/portrait/default.jpg")->after('about');
         });
+        */
     }
 
     /**
