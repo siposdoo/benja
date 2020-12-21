@@ -28,5 +28,27 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
     Route::get('products', 'ProductController@index')->middleware('auth:api');
+
+    Route::post('addclient', 'KompanijaController@store')->middleware('auth:api');
+    Route::post('updateclient', 'KompanijaController@store')->middleware('auth:api');
     Route::get('kompanije', 'KompanijaController@index')->middleware('auth:api');
+
+    Route::get('kamioni', 'KamionController@index')->middleware('auth:api');
+    Route::post('addkamion', 'KamionController@store')->middleware('auth:api');
+    Route::post('updatekamion', 'KamionController@store')->middleware('auth:api');
+
+
+    Route::get('vozaci', 'VozacController@index')->middleware('auth:api');
+    Route::post('addvozac', 'VozacController@store')->middleware('auth:api');
+    Route::post('updatevozac', 'VozacController@store')->middleware('auth:api');
+
+
+    Route::get('prikolice', 'PrikolicaController@index')->middleware('auth:api');
+    Route::post('addprikolica', 'PrikolicaController@store')->middleware('auth:api');
+    Route::post('updateprikolica', 'PrikolicaController@store')->middleware('auth:api');
+
+
+
+
+
     });

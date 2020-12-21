@@ -41,6 +41,13 @@ export default [
         
       },
       {
+        url: '/nalozi',
+        name: 'Nalozi',
+        icon: 'MapIcon',
+        slug: 'nalozi',
+        i18n: 'Nalozi'
+      },
+      {
          
        
         url: '/unosproizvoda',
@@ -80,26 +87,32 @@ export default [
     ]
   },
   {
-    header: 'Proizvodi',
+    header: 'FIRMA',
     icon: 'ListIcon',
-    i18n: 'Proizvodi',
-    name: 'Proizvodi',
+    i18n: 'FIRMA',
+    name: 'FIRMA',
     
  
     items: [
       {
-        url: '/proizvodi',
-        name: 'ListaProizvoda',
-        icon: 'ListIcon',
+        url: '/vozaci',
+        name: 'Vozači',
+        icon: 'UserIcon',
         tagColor: 'primary',
-        i18n: 'ListaProizvoda',
+        i18n: 'Vozači',
       },
       {
-        url: '/kategorije',
-        name: 'Kategorije',
+        url: '/kamioni',
+        name: 'Kamioni',
         icon: 'ListIcon',
-        slug: 'kategorije',
-        i18n: 'Kategorije'
+        slug: 'kamioni',
+        i18n: 'Kamioni'
+      },{
+        url: '/prikolice',
+        name: 'Prikolice',
+        icon: 'ListIcon',
+        slug: 'prikolice',
+        i18n: 'Prikolice'
       }
     ]
   },

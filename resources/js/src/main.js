@@ -71,7 +71,13 @@ require('vue-tour/dist/vue-tour.css')
 // VeeValidate
 import VeeValidate from 'vee-validate'
 Vue.use(VeeValidate)
-
+import Geocoder from "@pderas/vue2-geocoder";
+Vue.use(Geocoder, {
+  defaultCountryCode: null, // e.g. 'CA'
+  defaultLanguage:    null, // e.g. 'en'
+  defaultMode:        'address', // or 'lat-lng'
+  googleMapsApiKey:   'AIzaSyDB4XahmDBU2vfMiZk4Auw_odUh9OIF7q0'
+});
 
 // Google Maps
 import * as VueGoogleMaps from 'vue2-google-maps'

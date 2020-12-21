@@ -62,7 +62,7 @@
           <!-- ADD NEW -->
           <div class="p-3 mb-4 mr-4 rounded-lg cursor-pointer flex items-center justify-between text-lg font-medium text-base text-primary border border-solid border-primary" @click="addNewData">
               <feather-icon icon="PlusIcon" svgClasses="h-4 w-4" />
-              <span class="ml-2 text-base text-primary">Dodaj novu</span>
+              <span class="ml-2 text-base text-primary">Dodaj </span>
           </div>
         </div>
 
@@ -93,11 +93,10 @@
       <template slot="thead">
         
         <vs-th sort-key="ida">#ID</vs-th>
-        <vs-th sort-key="naslovweb">Naziv</vs-th>
+        <vs-th sort-key="naslovweb">Ime i prezime</vs-th>
          <vs-th sort-key="kolicina">Adresa</vs-th>
-        <vs-th sort-key="pjcijena">Grad</vs-th>
-         <vs-th sort-key="mincijena">Drzava</vs-th>
-        
+        <vs-th sort-key="pjcijena">Kontakt</vs-th>
+         
         
         
         <vs-th>Akcije</vs-th>
@@ -122,12 +121,10 @@
 
              
             <vs-td>
-              <p class="product-price">{{ tr.city }}</p>
+              <p class="product-price">{{ tr.kontakt }}</p>
             </vs-td>
  
-            <vs-td>
-              <p class="product-price">{{ tr.state }}</p>
-            </vs-td>
+             
         
             <vs-td class="whitespace-no-wrap">
               <feather-icon icon="EditIcon" svgClasses="w-5 h-5 hover:text-primary stroke-current" @click.stop="editData(tr)" />
@@ -142,7 +139,7 @@
 </template>
 
 <script>
-import DataViewSidebar from './UnosP2sidebar.vue'
+import DataViewSidebar from './VozacSidebar'
 
 import moduleDataList from '@/store/data-list/moduleDataList.js'
 
@@ -183,9 +180,9 @@ return result[0].urlImage
     return 'images/pages/404.png'
 }
       },
-    getProducts(){
+    getVozace(){
 
-     this.$http.get('/api/auth/kompanije', { headers:{
+     this.$http.get('/api/auth/vozaci', { headers:{
       'Authorization':"Bearer" + localStorage.getItem('accessToken')
     }})
       .then((response) => { this.products=response.data.results 
@@ -226,7 +223,7 @@ return result[0].urlImage
   created () {
         this.lct=localStorage.getItem('accessToken')
     
-       this.getProducts()
+       this.getVozace()
 
     if (!moduleDataList.isRegistered) {
       this.$store.registerModule('dataList', moduleDataList)

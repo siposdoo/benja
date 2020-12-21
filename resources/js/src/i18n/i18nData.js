@@ -2,6 +2,10 @@
 export default {
   en: {
     Početna: 'Početna',
+    Vozači: 'Vozači',
+    Kamioni: 'Kamioni',
+    Prikolice: 'Prikolice',
+    FIRMA: 'FIRMA',
     Dobavljači: 'Dobavljači',
     Šopovi: 'Šopovi',
     Narudžbe: 'Narudžbe',

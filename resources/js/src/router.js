@@ -81,6 +81,57 @@ const router = new Router({
           }
         },
         {
+          path: '/vozaci',
+          name: 'app-uvozaci',
+          component: () => import('@/views/pages/vkp/Vozac.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Početna', url: '/benja' },
+              { title: 'Vozači', active: true }
+            ],
+            pageTitle: 'Vozači',
+            rule: 'unosproizvoda'
+          }
+        },
+        {
+          path: '/prikolice',
+          name: 'app-prikolice',
+          component: () => import('@/views/pages/vkp/Prikolica.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Početna', url: '/benja' },
+              { title: 'Prikolice', active: true }
+            ],
+            pageTitle: 'Prikolice',
+            rule: 'unosproizvoda'
+          }
+        },
+        {
+          path: '/kamioni',
+          name: 'app-kamion',
+          component: () => import('@/views/pages/vkp/Kamion.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Početna', url: '/benja' },
+              { title: 'Kamioni', active: true }
+            ],
+            pageTitle: 'Kamioni',
+            rule: 'unosproizvoda'
+          }
+        },{
+          path: '/nalozi',
+          name: 'app-nalozi',
+          component: () => import('@/views/pages/nalozi/Nalozi.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Početna', url: '/benja' },
+              { title: 'Nalozi', active: true }
+            ],
+            pageTitle: 'Nalozi',
+            rule: 'unosproizvoda'
+          }
+        },
+        {
           path: '/benja',
           name: 'app-benja',
           component: () => import('@/views/pages/Main.vue'),

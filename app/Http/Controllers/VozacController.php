@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Kompanija;
+use App\Vozac;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class KompanijaController extends Controller
+
+class VozacController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,11 @@ class KompanijaController extends Controller
      */
     public function index()
     {
-        $kompanija = Kompanija::All();
+        $results = Vozac::All();
         
         return response()->json([
            
-            'results' => $kompanija
+            'results' => $results
             
             ]);
     }
@@ -46,41 +46,37 @@ class KompanijaController extends Controller
         $v = Validator::make($request->all(), [
             'name' => 'required|min:3',
             'address' => 'required|min:3',
-            'city'  => 'required|min:3',
-            'state'  => 'required|min:2',
-            'lat'  => 'required',
-            'lng'  => 'required',
+            'kontakt'  => 'required|min:5',
+            
         ]);
 
         if ($v->fails())
         {
             return response()->json([
-                'error' => 'companie_add_validation_error',
+                'error' => 'vozac_add_validation_error',
                 'errors' => $v->errors()
             ], 422);
         }
         
 if($request->id){
-    $companie =  Kompanija::findOrFail($request->id);
-    $companie->name = $request->name;
-    $companie->city = $request->city;
-    $companie->state = $request->state;
-    $companie->address = $request->address;
-    $companie->lat = $request->lat;
-    $companie->lng = $request->lng;
+    $vozac =  Vozac::findOrFail($request->id);
+    $vozac->name = $request->name;
+ 
+    $vozac->address = $request->address;
+    $vozac->kontakt = $request->kontakt;
+    
 
-    $companie->save();
+    $vozac->save();
     return response()->json(['status' => 'success'], 200);
 
 }else{
-    $companie = new Kompanija;
-    $companie->name = $request->name;
-    $companie->city = $request->city;
-    $companie->state = $request->state;
-    $companie->address = $request->address;
-    $companie->lat = $request->lat;
-    $companie->lng = $request->lng;
-    $companie->save();
+    $vozac = new Vozac;
+    $vozac->name = $request->name;
+ 
+    $vozac->address = $request->address;
+    $vozac->kontakt = $request->kontakt;
+    
+    $vozac->save();
     return response()->json(['status' => 'success'], 200);
 
 }
@@ -88,14 +84,13 @@ if($request->id){
          
 
     }
-
     /**
      * Display the specified resource.
      *
-     * @param  \App\Kompanija  $kompanija
+     * @param  \App\Vozac  $vozac
      * @return \Illuminate\Http\Response
      */
-    public function show(Kompanija $kompanija)
+    public function show(Vozac $vozac)
     {
         //
     }
@@ -103,10 +98,10 @@ if($request->id){
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Kompanija  $kompanija
+     * @param  \App\Vozac  $vozac
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kompanija $kompanija)
+    public function edit(Vozac $vozac)
     {
         //
     }
@@ -115,10 +110,10 @@ if($request->id){
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Kompanija  $kompanija
+     * @param  \App\Vozac  $vozac
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kompanija $kompanija)
+    public function update(Request $request, Vozac $vozac)
     {
         //
     }
@@ -126,10 +121,10 @@ if($request->id){
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Kompanija  $kompanija
+     * @param  \App\Vozac  $vozac
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kompanija $kompanija)
+    public function destroy(Vozac $vozac)
     {
         //
     }

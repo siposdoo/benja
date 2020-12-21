@@ -34,7 +34,7 @@
       <vs-button :disabled="!validateForm" @click="loginJWT">Prijava</vs-button>
        <router-link   to="/" class="vx-logo cursor-pointer mx-auto flex items-center">
         
-        <span class="vx-logo-text text-primary">OFFER-X</span>
+        <span class="vx-logo-text text-primary">BENJA APP</span>
       </router-link>
     </div>
   </div>
