@@ -98,7 +98,7 @@
             placeholder="065123122, email@email.com..."
             class="mt-5 w-full"
             name="kontakt"
-            v-validate="'required'"
+            
           />
           <span class="text-danger text-sm" v-show="errors.has('kontakt')">{{
             errors.first("kontakt")
@@ -493,7 +493,7 @@ export default {
       return (
        
         this.name &&
-        this.kompanija &&
+       
         this.kontakt &&
         this.address &&
         this.city &&
