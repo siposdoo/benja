@@ -92,6 +92,17 @@
             class="mt-5 w-full tet"
           >
           </v-select>
+            <vs-input
+            label="Kontakt"
+            v-model="kontakt"
+            placeholder="065123122, email@email.com..."
+            class="mt-5 w-full"
+            name="kontakt"
+            v-validate="'required'"
+          />
+          <span class="text-danger text-sm" v-show="errors.has('kontakt')">{{
+            errors.first("kontakt")
+          }}</span>
 
          </form>
          <gmap-map v-if="provjera" class="mt-5 w-full tet" :center="location" :zoom="15" style="width: 100%; height: 300px">
@@ -151,6 +162,8 @@ export default {
       provjera2: false,
       location:{lng:null,lat:null},
       name: "",
+      kompanija: "",
+      kontakt:"",
       address: "",
       city: "",
       state: "",
@@ -444,10 +457,11 @@ export default {
         this.$validator.reset();
       } else {
         console.log(this.data)
-        const {  id, name, address, city,state,lat,lng } = JSON.parse(
+        const {  id, name, address, city,state,lat,lng,kontakt } = JSON.parse(
           JSON.stringify(this.data)
         );
         this.dataId = id;
+         this.kontakt = kontakt;
         this.name = name;
         this.address = address;
         this.city = city;
@@ -479,6 +493,8 @@ export default {
       return (
        
         this.name &&
+        this.kompanija &&
+        this.kontakt &&
         this.address &&
         this.city &&
         this.result.value
@@ -529,6 +545,8 @@ export default {
           address: app.address,
           city: app.city,
           name: app.name,
+          kontakt: app.kontakt,
+          kompanija: app.kompanija,
           state: app.result.value,
           lng: app.location.lng,
           lat: app.location.lat,
@@ -554,6 +572,8 @@ export default {
       
       this.name = "";
       this.address = "";
+      this.kontakt = "";
+      this.kompanija = "";
       this.result = {value:'',label:''};
       this.city = "";
       this.dataId=null;

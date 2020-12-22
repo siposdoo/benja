@@ -47,6 +47,8 @@ class KompanijaController extends Controller
             'name' => 'required|min:3',
             'address' => 'required|min:3',
             'city'  => 'required|min:3',
+            'kontakt'  => 'required|min:3',
+            
             'state'  => 'required|min:2',
             'lat'  => 'required',
             'lng'  => 'required',
@@ -63,6 +65,7 @@ class KompanijaController extends Controller
 if($request->id){
     $companie =  Kompanija::findOrFail($request->id);
     $companie->name = $request->name;
+    $companie->kontakt = $request->kontakt;
     $companie->city = $request->city;
     $companie->state = $request->state;
     $companie->address = $request->address;
@@ -76,6 +79,8 @@ if($request->id){
     $companie = new Kompanija;
     $companie->name = $request->name;
     $companie->city = $request->city;
+    $companie->kontakt = $request->kontakt;
+
     $companie->state = $request->state;
     $companie->address = $request->address;
     $companie->lat = $request->lat;
