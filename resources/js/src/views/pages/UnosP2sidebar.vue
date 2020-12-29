@@ -86,8 +86,8 @@
           <v-select
             label="label"
             placeholder="Država"
-            v-model="result"
-            :value="result.value"
+            v-model="lokacija"
+            :value="lokacija.value"
             :options="optionsCountry"
             class="mt-5 w-full tet"
           >

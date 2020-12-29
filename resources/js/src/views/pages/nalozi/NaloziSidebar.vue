@@ -64,6 +64,73 @@
             errors.first("brvozila")
           }}</span>
            </div>
+          <vx-card
+          class="mt-2"
+    title="Utovar"
+    title-color="primary"
+     >
+        <div  class="flex p-4 w-full bg-img vx-row" v-for="(input,k) in kompod" :key="k">
+             <div class="vx-col sm:w-1/3 md:w-2/5 lg:w-2/5">
+           <v-select
+            label="name"
+            placeholder="Kompanija"
+            v-model="input.lokacija"
+            :value="input.lokacija"
+            :options="kompanije"
+            class="mt-6 w-full tet"
+          >
+          </v-select>
+           </div>
+            <div class="vx-col sm:w-1/3 md:w-2/5 lg:w-2/5">
+          <vs-input
+            label="Broj vozila - utovar"
+            v-model="input.vozila"
+            placeholder=""
+
+            class=" w-full"
+             v-validate="'required'"
+          />
+           </div>
+           <div class="p-3 mt-5 vx-colsm:w-1/3 md:w-1/5 lg:w-1/5">
+<vs-button size="small"  class="bg-warning" @click="removeod(k)" v-show="k || ( !k && kompod.length > 1)">-</vs-button>
+<vs-button size="small"  @click="addod(k)" v-show="k == kompod.length-1">+</vs-button>
+           </div>
+           </div>
+          </vx-card>
+            <vx-card
+          class="mt-2"
+    title="Istovar"
+    title-color="primary"
+     >
+        <div  class="flex p-4 w-full bg-img vx-row" v-for="(input,k) in kompdo" :key="k">
+
+             <div class="vx-col sm:w-1/3 md:w-2/5 lg:w-2/5">
+           <v-select
+            label="name"
+            placeholder="Kompanija"
+            v-model="input.lokacija"
+            :value="input.lokacija"
+            :options="kompanije"
+            class="mt-6 w-full tet"
+          >
+          </v-select>
+           </div>
+            <div class="vx-col sm:w-1/3 md:w-2/5 lg:w-2/5">
+          <vs-input
+            label="Broj vozila - istovar"
+            v-model="input.vozila"
+            placeholder=""
+
+            class=" w-full"
+             v-validate="'required'"
+          />
+           </div>
+           <div class="p-3 mt-5 vx-col sm:w-1/3 md:w-1/5 lg:w-1/5">
+<vs-button size="small"  class="bg-warning" @click="removedo(k)" v-show="k || ( !k && kompdo.length > 1)">-</vs-button>
+<vs-button size="small"  @click="adddo(k)" v-show="k == kompdo.length-1">+</vs-button>
+           </div>
+           </div>
+            </vx-card>
              <div class="vx-col sm:w-1/3 md:w-1/3 lg:w-1/3">
           <vs-input
             label="Broj fakture"
@@ -240,6 +307,9 @@ export default {
       provjera: false,
       provjera2: false,
       iznoskm:null,
+      kompanije:[],
+      kompod:[{vozila:'',lokacije:''}],
+      kompdo:[{vozila:'',lokacije:''}],
       iznosuer:null,
       location:{lng:null,lat:null},
       proizvodjac: "",
@@ -325,7 +395,43 @@ export default {
       return this.$store.getters.scrollbarTag;
     },
   },
+  created () {
+        
+    
+       this.getKompanije()
+  },
   methods: {
+      addod () {
+      this.kompod.push({
+        lokacije: '',
+        vozila: ''
+      })
+      console.log(this.kompod)
+    },
+ adddo () {
+      this.kompdo.push({
+        lokacije: '',
+        vozila: ''
+      })
+      console.log(this.kompdo)
+    },
+    removeod (index) {
+      this.kompod.splice(index, 1)
+    },
+      removedo (index) {
+      this.kompdo.splice(index, 1)
+    },
+     getKompanije(){
+
+     this.$http.get('/api/auth/kompanije', { headers:{
+      'Authorization':"Bearer" + localStorage.getItem('accessToken')
+    }})
+      .then((response) => { this.kompanije=response.data.results 
+      console.log(this.kompanije)
+      })
+      .catch((error)   => { console.log(error) })
+      
+    },
    changeKM(){
 this.iznosuer=(this.iznoskm/1.95).toFixed(2)
    }, changeEUR(){

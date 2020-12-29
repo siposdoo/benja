@@ -1,10 +1,14 @@
 
 <template>
-  <gmap-map :center="center" :zoom="15" style="width: 100%; height: 500px">
+  <gmap-map :center="center" :zoom="6" style="width: 100%; height: 500px">
     <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
-      Marker 3
+     <h5>{{contentInfo}}</h5> 
+     <h6>Utovari:0</h6>
+     <h6>Istovari:0</h6>
+     <p>Lokacije:</p>
+
     </gmap-info-window>
-    <gmap-marker :key="i" v-for="(m,i) in markers" :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)"></gmap-marker>
+    <gmap-marker :key="m.id" v-for="m in kompanije" :position="{lat:parseFloat(m.lat),lng:parseFloat(m.lng)}" :clickable="true" @click="toggleInfoWindow(m)"></gmap-marker>
   </gmap-map>
 </template>
 
@@ -12,8 +16,10 @@
 export default {
   data() {
     return {
-      center: { lat: 47.376332, lng: 8.547511 },
+      center: { lat: 47.403568, lng:  14.1531833},
       infoContent: '',
+      kompanije:[],
+      contentInfo:'',
       infoWindowPos: null,
       infoWinOpen: false,
       currentMidx: null,
@@ -29,19 +35,37 @@ export default {
     }
   },
   methods: {
-    toggleInfoWindow: function(marker, idx) {
-      this.infoWindowPos = marker.position;
-      this.infoContent = marker.infoText;
+    
+     
+      getKompanije(){
+
+     this.$http.get('/api/auth/kompanije', { headers:{
+      'Authorization':"Bearer" + localStorage.getItem('accessToken')
+    }})
+      .then((response) => { this.kompanije=response.data.results 
+      console.log(this.kompanije)
+      })
+      .catch((error)   => { console.log(error) })
+      
+    },
+    toggleInfoWindow(marker) {
+      console.log(marker)
+      this.infoWindowPos = {lat:parseFloat(marker.lat),lng:parseFloat(marker.lng)};
+      this.infoContent = marker.name;
+      this.contentInfo=marker.name
       //check if its the same marker that was selected if yes toggle
-      if (this.currentMidx == idx) {
+      if (this.currentMidx == marker.name) {
         this.infoWinOpen = !this.infoWinOpen;
       }
       //if different marker set infowindow to open and reset current marker index
       else {
         this.infoWinOpen = true;
-        this.currentMidx = idx;
+        this.currentMidx = marker.name;
       }
     }
+  },
+  created(){
+    this.getKompanije()
   }
 }
 </script>
