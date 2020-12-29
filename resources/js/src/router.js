@@ -107,6 +107,19 @@ const router = new Router({
           }
         },
         {
+          path: '/izvjestaji',
+          name: 'app-izvjestaji',
+          component: () => import('@/views/pages/vkp/Prikolica.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Početna', url: '/benja' },
+              { title: 'Izvjestaji', active: true }
+            ],
+            pageTitle: 'Izvjestaji',
+            rule: 'unosproizvoda'
+          }
+        },
+        {
           path: '/kamioni',
           name: 'app-kamion',
           component: () => import('@/views/pages/vkp/Kamion.vue'),

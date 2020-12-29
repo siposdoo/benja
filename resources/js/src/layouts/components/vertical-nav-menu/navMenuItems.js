@@ -114,6 +114,13 @@ export default [
         slug: 'prikolice',
         i18n: 'Prikolice'
       }
+      ,{
+        url: '/izvjetaji',
+        name: 'Izvjestaji',
+        icon: 'ListIcon',
+        slug: 'izvjestaji',
+        i18n: 'Izvjestaji'
+      }
     ]
   },
   
