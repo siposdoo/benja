@@ -1,6 +1,6 @@
 
 <template>
-  <gmap-map :center="center" :zoom="6" style="width: 100%; height: 500px">
+  <gmap-map :center="center" :zoom="6" style="width: 100%; height: 700px">
     <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
      <h5>{{contentInfo}}</h5> 
      <h6>Utovari:0</h6>
