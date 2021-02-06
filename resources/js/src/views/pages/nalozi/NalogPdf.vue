@@ -217,7 +217,7 @@
         <div class="flex flex-wrap items-center justify-between">
           <div class="flex items-center">
             <vs-button
-              class="mb-base mr-3"
+              class="	d-none d-sm-block d-md-none mb-base mr-3"
               type="border"
               icon-pack="feather"
               icon="icon icon-download"
