@@ -34,7 +34,7 @@ export default [
       {
          
        
-        url: '/benja',
+        url: '/',
         name: 'Početna',
         icon: 'HomeIcon',
         i18n: 'Početna',

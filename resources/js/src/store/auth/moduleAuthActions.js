@@ -328,7 +328,7 @@ export default {
         
              // jwt.refreshToken().then(response => { resolve(response) })
              if(tok=="b2eed3a65bb08aeff6857224776185d9"){
-              window.location.href = "/unosproizvoda"
+              window.location.href = "/nalozi"
 
              }else{
               window.location.href = "/"
