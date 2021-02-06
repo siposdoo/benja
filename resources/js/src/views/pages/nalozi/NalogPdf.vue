@@ -225,7 +225,7 @@
               >Preuzmi</vs-button
             >
             <vs-button
-              class="mb-base mr-3"
+              class="mb-base mr-3 d-none d-lg-block d-xl-block"
               icon-pack="feather"
               icon="icon icon-file"
               @click="printInvoice"
