@@ -991,10 +991,10 @@ export default {
           data: app.nalogdata,
         })
         .then(function (response) {
-          // app.success = true;
-          //app.initValues();
-          // app.isSidebarActive = false;
-          // location.reload();
+           app.success = true;
+           app.initValues();
+            app.isSidebarActive = false;
+           location.reload();
         })
         .catch(function (res) {
           console.log(res.response.data.errors);
