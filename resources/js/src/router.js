@@ -73,7 +73,7 @@ const router = new Router({
           component: () => import('@/views/pages/Kompanija.vue'),
           meta: {
             breadcrumb: [
-              { title: 'Početna', url: '/benja' },
+              { title: 'Početna', url: '/' },
               { title: 'Kompanije', active: true }
             ],
             pageTitle: 'Kompanije',
@@ -86,7 +86,7 @@ const router = new Router({
           component: () => import('@/views/pages/vkp/Vozac.vue'),
           meta: {
             breadcrumb: [
-              { title: 'Početna', url: '/benja' },
+              { title: 'Početna', url: '/' },
               { title: 'Vozači', active: true }
             ],
             pageTitle: 'Vozači',
@@ -99,7 +99,7 @@ const router = new Router({
           component: () => import('@/views/pages/vkp/Prikolica.vue'),
           meta: {
             breadcrumb: [
-              { title: 'Početna', url: '/benja' },
+              { title: 'Početna', url: '/' },
               { title: 'Prikolice', active: true }
             ],
             pageTitle: 'Prikolice',
@@ -114,7 +114,7 @@ const router = new Router({
           component: () => import('@/views/pages/vkp/Prikolica.vue'),
           meta: {
             breadcrumb: [
-              { title: 'Početna', url: '/benja' },
+              { title: 'Početna', url: '/' },
               { title: 'Izvjestaji', active: true }
             ],
             pageTitle: 'Izvjestaji',
@@ -127,7 +127,7 @@ const router = new Router({
           component: () => import('@/views/pages/vkp/Kamion.vue'),
           meta: {
             breadcrumb: [
-              { title: 'Početna', url: '/benja' },
+              { title: 'Početna', url: '/' },
               { title: 'Kamioni', active: true }
             ],
             pageTitle: 'Kamioni',
@@ -139,7 +139,7 @@ const router = new Router({
           component: () => import('@/views/pages/nalozi/Nalozi.vue'),
           meta: {
             breadcrumb: [
-              { title: 'Početna', url: '/benja' },
+              { title: 'Početna', url: '/' },
               { title: 'Nalozi', active: true }
             ],
             pageTitle: 'Nalozi',
@@ -147,12 +147,12 @@ const router = new Router({
           }
         },
         {
-          path: '/benja',
+          path: '/',
           name: 'app-benja',
           component: () => import('@/views/pages/Main.vue'),
           meta: {
             breadcrumb: [
-              { title: 'Početna', url: '/benja' }
+              { title: 'Početna', url: '/' }
               
             ],
             pageTitle: 'Početna',
