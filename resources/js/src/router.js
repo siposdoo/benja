@@ -66,7 +66,7 @@ const router = new Router({
             rule: 'editor'
           }
         },
-    
+       
         {
           path: '/unosproizvoda',
           name: 'app-unosp',
@@ -106,6 +106,8 @@ const router = new Router({
             rule: 'unosproizvoda'
           }
         },
+        
+
         {
           path: '/izvjestaji',
           name: 'app-izvjestaji',
@@ -1407,7 +1409,15 @@ const router = new Router({
         // =============================================================================
         // PAGES
         // =============================================================================
-         
+        {
+          path: '/nalog/:nalogId',
+          name: 'nalogPdf',
+          component: () => import('@/views/pages/nalozi/NalogPdf.vue'),
+          meta: {
+            
+             rule:'unosproizvoda'
+          }
+        },
         {
           path: '/pages/login',
           name: 'page-login',
@@ -1525,7 +1535,7 @@ else {
     next()
 } 
 */
-const publicPages = ['/pages/login', '/pages/register'];
+const publicPages = ['/pages/login', '/pages/register','/nalog/:nalogId'];
 const authRequired = !publicPages.includes(to.path);
 if (authRequired && !isLoggedIn()) {
   next('/pages/login');

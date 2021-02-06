@@ -1,6 +1,8 @@
 // en, de, fr, pt
 export default {
   en: {
+    Nalozi:'Nalozi', 
+    Izvjestaji:'Izvjestaji',
     Početna: 'Početna',
     Vozači: 'Vozači',
     Kamioni: 'Kamioni',

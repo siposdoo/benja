@@ -24,7 +24,7 @@
     <noscript>
       <strong>Žao nam je ali morate uključiti JavaScript jer bez njega OFFER-x ne radi..</strong>
     </noscript>
-    <div id="app">
+    <div ref="document" id="app">
     </div>
 
     <!-- <script src="js/app.js"></script> -->

@@ -87,11 +87,12 @@
             label="label"
             placeholder="Država"
             v-model="lokacija"
-            :value="lokacija.value"
+            :value="lokacija"
             :options="optionsCountry"
             class="mt-5 w-full tet"
           >
           </v-select>
+
             <vs-input
             label="Kontakt"
             v-model="kontakt"
@@ -100,6 +101,7 @@
             name="kontakt"
             
           />
+          <i>Za vise kontakata razdvojite ih znakom ';'</i>
           <span class="text-danger text-sm" v-show="errors.has('kontakt')">{{
             errors.first("kontakt")
           }}</span>
@@ -160,6 +162,7 @@ export default {
     return {
       provjera: false,
       provjera2: false,
+      lokacija:null,
       location:{lng:null,lat:null},
       name: "",
       kompanija: "",
