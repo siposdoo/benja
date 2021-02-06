@@ -55,7 +55,14 @@ border: 1px solid #000;
     animation: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1 fadein;
   }
 }
-
+.preuzmibtn{
+  @media (max-width: 700px) {
+    display: block;
+  }
+  @media (min-width: 700px) {
+    display: none;
+  }
+}
 .router-view {
   position: relative;
   padding: 2.2rem;
