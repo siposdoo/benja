@@ -17,7 +17,21 @@
           <div class="vx-row no-gutter justify-center items-center">
 
             <div class="vx-col hidden lg:block lg:w-1/2">
-              <img src="@assets/images/pages/login.png" alt="login" class="mx-auto">
+             <div class="carousel-example">
+        <swiper :options="swiperOption" :dir="$vs.rtl ? 'rtl' : 'ltr'" :key="$vs.rtl">
+            
+            <swiper-slide>
+              <img class="responsive" src="@assets/images/pages/loginslide/slide2.jpg" alt="banner">
+            </swiper-slide>
+             <swiper-slide>
+              <img class="responsive" src="@assets/images/pages/loginslide/slide5.jpg" alt="banner">
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+            <div class="swiper-button-prev" slot="button-prev"></div>
+            <div class="swiper-button-next" slot="button-next"></div>
+        </swiper>
+    </div>
+              <!--img src="@assets/images/pages/login.jpg" alt="login" class="mx-auto"-->
             </div>
 
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
@@ -25,7 +39,7 @@
 
                 <div class="vx-card__title mb-4">
                   <h4 class="mb-4">Prijava</h4>
-                  <p>Dobrodosli, molimo vas da se prijavite.</p>
+                  <p>Dobrodošli, molimo Vas da se prijavite.</p>
                 </div>
 
                 <vs-tabs>
@@ -47,12 +61,29 @@
 
 
 <script>
+import 'swiper/dist/css/swiper.min.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import LoginJwt from './LoginJWT.vue'
  
 export default {
-  components: {
-    LoginJwt
-   }
+    data() {
+        return {
+            swiperOption: {
+                autoplay: {
+                    delay: 5500,
+                    disableOnInteraction: false
+                },
+               
+                
+            }
+        }
+        },
+        components: {
+          LoginJwt,
+            swiper,
+            swiperSlide
+        }
+    
 }
 </script>
 
@@ -68,4 +99,24 @@ export default {
     margin-top: 1rem;
   }
 }
+ 
+  .swiper-img{
+    width: 100%;
+
+  }
+  .wrapper >>> .swiper-pagination-bullet-active{
+    background:#fff !important
+  }
+  .swiper-button-prev{
+    display: none;
+  }
+   .swiper-button-next{
+    display: none;
+  }
+  .wrapper{
+    overflow :hidden;
+    width:100%;
+    height:0;
+    padding-bottom :31.25%;
+  }
 </style>

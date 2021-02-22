@@ -4,11 +4,16 @@
    
       <!-- INVOICE CONTENT -->
       <div ref="content" class="p-base">
+<h3 style="text-align:center;">NALOG ZA UTOVAR</h3>
         <div class="p-3 vx-row p-3">
-          <div class="vx-col p-0 w-1/4 boxn-data">
-            <p class="bg-titme">Br. Vozila</p>
-            <p class="bg-cont">{{ ukupnoVozila }}</p>
+             <div
+            v-if="products[0].vozac1"
+            class="pl-1 vx-col p-0 w-1/4 boxn-data"
+          >
+            <p class="bg-titme">Datum utovara</p>
+            <p class="bg-cont">{{ products[0].datumutovara }}</p>
           </div>
+        
 
           <div
             v-if="products[0].polaziste"
@@ -17,17 +22,7 @@
             <p class="bg-titme">Polaziste</p>
             <p class="bg-cont">{{ products[0].polaziste }}</p>
           </div>
-          <div
-            v-if="products[0].vozac1"
-            class="pl-1 vx-col p-0 w-1/4 boxn-data"
-          >
-            <p class="bg-titme">Datum utovara</p>
-            <p class="bg-cont">{{ products[0].datumutovara }}</p>
-          </div>
-        </div>
-
-        <div class="p-3 vx-row">
-          <div v-if="products[0].vozac1" class="vx-col p-0 w-1/4 boxn-data">
+           <div v-if="products[0].vozac1" class="vx-col p-0 w-1/4 boxn-data">
             <p class="bg-titme">Vozač 1</p>
             <p class="bg-cont">{{ products[0].vozac1 }}</p>
           </div>
@@ -38,6 +33,11 @@
             <p class="bg-titme">Vozač 2</p>
             <p class="bg-cont">{{ products[0].vozac2 }}</p>
           </div>
+       
+        </div>
+
+        <div class="p-3 vx-row">
+         
           <div
             v-if="products[0].kamion"
             class="vx-col p-0 w-1/4 pl-1 boxn-data"
@@ -51,6 +51,10 @@
           >
             <p class="bg-titme">Prikolica</p>
             <p class="bg-cont">{{ products[0].prikolica }}</p>
+          </div>
+            <div class="vx-col p-0 w-1/4 boxn-data">
+            <p class="bg-titme">Br. Vozila</p>
+            <p class="bg-cont">{{ ukupnoVozila }}</p>
           </div>
         </div>
         <div ref="utovar" class="vx-col w-full mt-3">
@@ -168,17 +172,12 @@
         </div>
         <div class="p-3 vx-row">
           <div class="vx-col p-0 w-full boxn-data">
-            <p class="bg-titme">Uvozno uvoznocarinjenje</p>
+            <p class="bg-titme">Uvozno carinjenje</p>
             <p class="bg-cont">{{ products[0].grprelaz }}</p>
           </div>
         </div>
 
-        <div class="p-3 vx-row">
-          <div class="vx-col p-0 w-full boxn-data">
-            <p class="bg-titme">Kontakt</p>
-            <p class="bg-cont">{{ products[0].kontakt }}</p>
-          </div>
-        </div>
+        
         <div class="p-3 vx-row">
           <div class="vx-col p-0 w-full boxn-data">
             <p class="bg-titme">Google Maps</p>
@@ -195,25 +194,9 @@
           </div>
         </div>
 
-        <div class="p-3 vx-row">
-          <div class="vx-col p-0 w-full boxn-data">
-            <p class="bg-titme">Komitent</p>
-            <p class="bg-cont">
-              {{ products[0].kompanija.name }} -
-              {{ products[0].kompanija.address }},
-              {{ products[0].kompanija.city }} {{ products[0].kompanija.state }}
-            </p>
-          </div>
-        </div>
+        
 
-        <div class="p-3 vx-row">
-          <div class="vx-col p-0 w-full boxn-data">
-            <p class="bg-titme">Iznos</p>
-            <p class="bg-cont">
-              {{ products[0].iznoseur }} EUR / {{ products[0].iznoskm }} KM
-            </p>
-          </div>
-        </div>
+        
         <div class="flex flex-wrap items-center justify-between">
           <div class="flex items-center">
             <vs-button
