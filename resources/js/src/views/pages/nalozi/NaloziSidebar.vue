@@ -85,39 +85,55 @@
           </div>
           <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-1/4">
             <label for="example-datepicker">Vozač 1</label>
-            <vs-input
-              v-model="nalogdata.vozac1"
+            <vue-simple-suggest
+              :filter-by-query="true"
               placeholder="npr. Ime i Prezime"
               class="w-full"
-              v-validate="'required'"
-            />
+              v-model="nalogdata.vozac1"
+              display-attribute="name"
+              value-attribute="name"
+              :list="vozaci"
+            >
+            </vue-simple-suggest>
           </div>
           <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-1/4">
             <label for="example-datepicker">Vozač 2</label>
-            <vs-input
-              v-model="nalogdata.vozac2"
+           <vue-simple-suggest
+              :filter-by-query="true"
               placeholder="npr. Ime i Prezime"
               class="w-full"
-              v-validate="'required'"
-            />
+              v-model="nalogdata.vozac2"
+              display-attribute="name"
+              value-attribute="name"
+              :list="vozaci"
+            >
+            </vue-simple-suggest>
           </div>
           <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-1/4">
             <label for="example-datepicker">Kamion</label>
-            <vs-input
-              v-model="nalogdata.kamion"
-              placeholder="npr. Man 11t-O-112"
+             <vue-simple-suggest
+              :filter-by-query="true"
+              placeholder="npr. Man TGA"
               class="w-full"
-              v-validate="'required'"
-            />
+              v-model="nalogdata.kamion"
+              display-attribute="name"
+              value-attribute="name"
+              :list="kamioni"
+            >
+            </vue-simple-suggest>
           </div>
           <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-1/4">
             <label for="example-datepicker">Prikolica</label>
-            <vs-input
-              v-model="nalogdata.prikolica"
-              placeholder=""
+             <vue-simple-suggest
+              :filter-by-query="true"
+              placeholder="npr. Prikolica plava"
               class="w-full"
-              v-validate="'required'"
-            />
+              v-model="nalogdata.prikolica"
+              display-attribute="name"
+              value-attribute="name"
+              :list="prikolice"
+            >
+            </vue-simple-suggest>
           </div>
         </div>
       </vx-card>
@@ -421,6 +437,8 @@
 </template>
 
 <script>
+import VueSimpleSuggest from "vue-simple-suggest";
+import "vue-simple-suggest/dist/styles.css"; // Optional CSS
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
@@ -438,6 +456,7 @@ export default {
   },
   components: {
     VuePerfectScrollbar,
+    VueSimpleSuggest,
     "v-select": vSelect,
   },
   data() {
@@ -450,6 +469,9 @@ export default {
       provjera2: false,
       iznoskm: null,
       kompanije: [],
+      kamioni: [],
+      prikolice: [],
+      vozaci: [],
       nalozi: [],
 
       iznoseur: null,
@@ -900,7 +922,10 @@ export default {
     },
   },
   created() {
+    this.getVozaci();
     this.getKompanije();
+    this.getKamioni();
+    this.getPrikolice();
     this.getNaloge();
   },
   methods: {
@@ -943,6 +968,36 @@ export default {
     removedo(index) {
       this.nalogdata.kompdo.splice(index, 1);
     },
+     getPrikolice() {
+      this.$http
+        .get("/api/auth/prikolice", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          this.prikolice = response.data.results;
+          console.log(this.vozaci);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getVozaci() {
+      this.$http
+        .get("/api/auth/vozaci", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          this.vozaci = response.data.results;
+          console.log(this.vozaci);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     getKompanije() {
       this.$http
         .get("/api/auth/kompanije", {
@@ -953,6 +1008,21 @@ export default {
         .then((response) => {
           this.kompanije = response.data.results;
           console.log(this.kompanije);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+        getKamioni() {
+      this.$http
+        .get("/api/auth/kamioni", {
+          headers: {
+            Authorization: "Bearer" + localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          this.kamioni = response.data.results;
+          console.log(this.kamioni);
         })
         .catch((error) => {
           console.log(error);
@@ -991,10 +1061,10 @@ export default {
           data: app.nalogdata,
         })
         .then(function (response) {
-           app.success = true;
-           app.initValues();
-            app.isSidebarActive = false;
-           location.reload();
+          app.success = true;
+          app.initValues();
+          app.isSidebarActive = false;
+          location.reload();
         })
         .catch(function (res) {
           console.log(res.response.data.errors);

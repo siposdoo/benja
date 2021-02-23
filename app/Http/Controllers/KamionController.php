@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Kamion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 class KamionController extends Controller
@@ -16,7 +17,8 @@ class KamionController extends Controller
      */
     public function index()
     {
-        $results = Kamion::All();
+        $results = Kamion::select("*", DB::raw("CONCAT(kamions.proizvodjac,' ',kamions.model,'(',kamions.tablica,')') as name"))
+        ->get();
         
         return response()->json([
            
