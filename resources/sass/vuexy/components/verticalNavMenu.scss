@@ -42,8 +42,7 @@
       }
 
       &:hover:not(.vs-sidebar-reduceNotRebound):not(.vs-sidebar-reduceNotHoverExpand) {
-        .vs-sidebar--items {
-        }
+        
 
         .vs-sidebar-group .group-header i {
           display: block;
@@ -148,7 +147,7 @@
       a {
         color: #000;
         > * {
-         // transform: translateX(5px);
+        transform: translateX(5px);
         }
       }
     }
