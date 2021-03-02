@@ -182,7 +182,7 @@
           <div class="vx-col p-0 w-full boxn-data">
             <p class="bg-titme">Google Maps</p>
             <p class="bg-cont">
-              <a :href="'http://maps.google.com'">{{ products[0].gmaplink }}</a>
+              <a :href="products[0].gmaplink">{{ products[0].gmaplink }}</a>
             </p>
           </div>
         </div>
