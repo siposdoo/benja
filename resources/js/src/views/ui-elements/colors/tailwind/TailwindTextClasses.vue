@@ -16,7 +16,7 @@
         <span>There is also other tailwind classes like <code>text-white</code>, <code>text-black</code>, <code>text-transparent</code></span>
 
         <div class="demo-alignment">
-            <span class="text-primary">primary</span>
+            <span class=" text-theme">primary</span>
             <span class="text-success">success</span>
             <span class="text-danger">danger</span>
             <span class="text-warning">warning</span>
@@ -29,7 +29,7 @@
         <template slot="codeContainer">
 
 &lt;div class=&quot;demo-alignment&quot;&gt;
-  &lt;span class=&quot;text-primary&quot;&gt;primary&lt;/span&gt;
+  &lt;span class=&quot; text-theme&quot;&gt;primary&lt;/span&gt;
   &lt;span class=&quot;text-success&quot;&gt;success&lt;/span&gt;
   &lt;span class=&quot;text-danger&quot;&gt;danger&lt;/span&gt;
   &lt;span class=&quot;text-warning&quot;&gt;warning&lt;/span&gt;

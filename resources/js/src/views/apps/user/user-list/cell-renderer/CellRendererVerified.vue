@@ -7,7 +7,7 @@ export default {
   name: 'CellRendererVerified',
   computed: {
     textColor () {
-      return this.params.value ? 'text-primary' : 'text-grey'
+      return this.params.value ? ' text-theme' : 'text-grey'
     }
   }
 }

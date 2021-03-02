@@ -96,7 +96,7 @@
 
                 <div class="vx-row mb-4" v-if="currentMail.replies.length && !showThread">
                     <div class="vx-col w-full">
-                        <span class="text-primary font-medium ml-10 cursor-pointer" @click="showThread = true">{{ currentMail.replies.length }} Earlier Messages</span>
+                        <span class=" text-theme font-medium ml-10 cursor-pointer" @click="showThread = true">{{ currentMail.replies.length }} Earlier Messages</span>
                     </div>
                 </div>
                 <div v-if="isSidebarActive">
@@ -120,7 +120,7 @@
                             <vx-card>
                                 <div class="vx-row">
                                     <div class="vx-col w-full flex justify-between">
-                                        <span class="text-lg">Click here to <span class="text-primary font-semibold cursor-pointer">Reply</span> or <span class="text-primary font-semibold cursor-pointer">Forward</span></span>
+                                        <span class="text-lg">Click here to <span class=" text-theme font-semibold cursor-pointer">Reply</span> or <span class=" text-theme font-semibold cursor-pointer">Forward</span></span>
                                         <feather-icon icon="PaperclipIcon"></feather-icon>
                                     </div>
                                 </div>

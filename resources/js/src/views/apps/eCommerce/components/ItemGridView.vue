@@ -30,7 +30,7 @@
 
                         <!-- TITLE & DESCRIPTION -->
                         <div class="my-4">
-                            <h6 class="truncate font-semibold mb-1 hover:text-primary cursor-pointer" @click="navigate_to_detail_view">{{ item.name }}</h6>
+                            <h6 class="truncate font-semibold mb-1 hover: text-theme cursor-pointer" @click="navigate_to_detail_view">{{ item.name }}</h6>
                             <p class="item-description truncate text-sm">{{ item.description }}</p>
                         </div>
                     </div>

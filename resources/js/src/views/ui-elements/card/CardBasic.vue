@@ -87,7 +87,7 @@
                                 <span class="ml-2">{{ card_4.footer_text_1 }}</span>
                             </span>
                             <span class="flex items-center">
-                                <feather-icon :icon="card_4.footer_text_2_icon" svgClasses="h-5 w-5 text-primary stroke-current" />
+                                <feather-icon :icon="card_4.footer_text_2_icon" svgClasses="h-5 w-5  text-theme stroke-current" />
                                 <span class="ml-2">{{ card_4.footer_text_2 }}</span>
                             </span>
                         </div>
@@ -224,7 +224,7 @@
                           <span class="ml-2">{{ card_9.meta.likes }}</span>
                         </span>
                         <span class="flex mr-6">
-                          <feather-icon class="cursor-pointer" icon="MessageSquareIcon" svgClasses="text-primary stroke-current h-6 w-6" />
+                          <feather-icon class="cursor-pointer" icon="MessageSquareIcon" svgClasses=" text-theme stroke-current h-6 w-6" />
                           <span class="ml-2">{{ card_9.meta.comments }}</span>
                         </span>
                         <span class="flex mr-6">

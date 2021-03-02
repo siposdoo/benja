@@ -16,8 +16,8 @@
 
  
       <router-link tag="div" to="/" class="vx-logo cursor-pointer mx-auto flex items-center">
-        <logo class="w-10 mr-4 fill-current text-primary" />
-        <span class="vx-logo-text text-primary">BENJA-AUTO</span>
+        <logo class="w-10 mr-4 fill-current  text-theme" />
+        <span class="vx-logo-text  text-theme">BENJA-AUTO</span>
       </router-link>
 
        

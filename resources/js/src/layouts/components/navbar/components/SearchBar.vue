@@ -16,7 +16,7 @@
         @closeSearchbar="showFullSearch = false">
 
         <template v-slot:group="{ group_name }">
-          <p class="font-semibold text-primary">{{ group_name | title }}</p>
+          <p class="font-semibold  text-theme">{{ group_name | title }}</p>
         </template>
 
         <!-- Pages Suggestion -->

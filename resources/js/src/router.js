@@ -1414,8 +1414,8 @@ const router = new Router({
           name: 'nalogPdf',
           component: () => import('@/views/pages/nalozi/NalogPdf.vue'),
           meta: {
-            
-             rule:'unosproizvoda'
+            allowAnonymous: true,
+             rule:'public'
           }
         },
         {
@@ -1537,7 +1537,7 @@ else {
 */
 const publicPages = ['/pages/login', '/pages/register','/nalog/:nalogId'];
 const authRequired = !publicPages.includes(to.path);
-if (authRequired && !isLoggedIn()) {
+if (!to.meta.allowAnonymous && !isLoggedIn()) {
   next('/pages/login');
 } else {
   if(to.path=="/" && from.path=="/pages/login")

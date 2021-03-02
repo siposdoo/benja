@@ -30,7 +30,7 @@
                                 <!-- SLOT: ITEM META -->
                                 <template slot="item-meta">
                                     <h6
-                                      class="item-name font-semibold mb-1 cursor-pointer hover:text-primary"
+                                      class="item-name font-semibold mb-1 cursor-pointer hover: text-theme"
                                       @click="$router.push({name: 'ecommerce-item-detail-view', params: {item_id: item.objectID }}).catch(() => {})">{{ item.name }}</h6>
                                     <p class="text-sm mb-2">By <span class="font-semibold cursor-pointer">{{ item.brand }}</span></p>
                                     <p class="text-success text-sm">In Stock</p>
@@ -68,7 +68,7 @@
                             <p class="text-grey mb-3">Options</p>
                             <div class="flex justify-between">
                                 <span class="font-semibold">Coupons</span>
-                                <span class="font-medium text-primary cursor-pointer">Apply</span>
+                                <span class="font-medium  text-theme cursor-pointer">Apply</span>
                             </div>
 
                             <vs-divider />
@@ -88,7 +88,7 @@
                             </div>
                             <div class="flex justify-between mb-2">
                                 <span class="text-grey">EMI Eligibility</span>
-                                <a href="#" class="text-primary">Details</a>
+                                <a href="#" class=" text-theme">Details</a>
                             </div>
                             <div class="flex justify-between mb-2">
                                 <span class="text-grey">Delivery Charges</span>

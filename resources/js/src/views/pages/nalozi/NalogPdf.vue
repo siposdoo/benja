@@ -357,7 +357,7 @@ export default {
     },
     getNalozi() {
       this.$http
-        .post("/api/auth/nalozi", {
+        .get("/api/auth/nalozi", {
           hsh: this.$route.params.nalogId,
 
           headers: {

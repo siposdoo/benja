@@ -72,11 +72,11 @@
  -->
           <!-- ADD NEW -->
           <div
-            class="p-3 mb-4 mr-4 rounded-lg cursor-pointer flex items-center justify-between text-lg font-medium text-base text-primary border border-solid border-primary"
+            class="p-3 mb-4 mr-4 rounded-lg cursor-pointer flex items-center justify-between text-lg font-medium text-base  text-theme border border-solid text-theme"
             @click="addNewData"
           >
             <feather-icon icon="PlusIcon" svgClasses="h-4 w-4" />
-            <span class="ml-2 text-base text-primary">Dodaj </span>
+            <span class="ml-2 text-base  text-theme">Dodaj </span>
           </div>
         </div>
 
@@ -165,12 +165,12 @@
             <vs-td class="whitespace-no-wrap">
               <a target="_blank" :href="'nalog/' + tr.hash"> <feather-icon
                 icon="GlobeIcon"
-                svgClasses="w-5 h-5 hover:text-primary stroke-current"
+                svgClasses="w-5 h-5 hover: text-theme stroke-current"
                 @click.stop="showData(tr.hash)"
               /></a>
               <feather-icon
                 icon="EditIcon"
-                svgClasses="w-5 h-5 hover:text-primary stroke-current"
+                svgClasses="w-5 h-5 hover: text-theme stroke-current"
                 @click.stop="editData(tr)"
               />
               <feather-icon

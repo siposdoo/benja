@@ -38,7 +38,7 @@
               </ul>
               </component>
               <div
-                class=" checkout-footer fixed bottom-0 rounded-b-lg text-primary font-semibold w-full p-2 text-center border border-b-0 border-l-0 border-r-0 border-solid d-theme-border-grey-light cursor-pointer"
+                class=" checkout-footer fixed bottom-0 rounded-b-lg  text-theme font-semibold w-full p-2 text-center border border-b-0 border-l-0 border-r-0 border-solid d-theme-border-grey-light cursor-pointer"
                 @click="$router.push('/apps/eCommerce/checkout').catch(() => {})">
 
                 <span class="flex items-center justify-center">

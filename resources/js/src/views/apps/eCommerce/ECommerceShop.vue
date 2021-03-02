@@ -57,12 +57,12 @@
                                     icon="GridIcon"
                                     @click="currentItemView='item-grid-view'"
                                     class="p-2 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer"
-                                    :svgClasses="{'text-primary stroke-current': currentItemView == 'item-grid-view'}" />
+                                    :svgClasses="{' text-theme stroke-current': currentItemView == 'item-grid-view'}" />
                                 <feather-icon
                                     icon="ListIcon"
                                     @click="currentItemView='item-list-view'"
                                     class="p-2 ml-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer hidden sm:inline-flex"
-                                    :svgClasses="{'text-primary stroke-current': currentItemView == 'item-list-view'}" />
+                                    :svgClasses="{' text-theme stroke-current': currentItemView == 'item-list-view'}" />
                             </div>
                         </div>
                     </div>
@@ -89,8 +89,8 @@
                                     class="flex items-center cursor-pointer py-1"
                                     @click="refine(item.value)">
 
-                                    <feather-icon icon="CircleIcon" :svgClasses="[{ 'text-primary fill-current': item.isRefined}, 'h-5 w-5']" />
-                                    <span class="ml-2" :class="{'text-primary': item.isRefined}">{{ item.label }}</span>
+                                    <feather-icon icon="CircleIcon" :svgClasses="[{ ' text-theme fill-current': item.isRefined}, 'h-5 w-5']" />
+                                    <span class="ml-2" :class="{' text-theme': item.isRefined}">{{ item.label }}</span>
                                 </li>
                             </ul>
                         </ais-numeric-menu>
@@ -122,8 +122,8 @@
                             }">
                                 <ul>
                                     <li v-for="item in items" :key="item.value" class="flex items-center cursor-pointer py-1" @click="refine(item.value)">
-                                        <feather-icon icon="CircleIcon" :svgClasses="[{ 'text-primary fill-current': item.isRefined}, 'h-5 w-5']" />
-                                        <span class="ml-2" :class="{'text-primary': item.isRefined}">{{ item.label }}</span>
+                                        <feather-icon icon="CircleIcon" :svgClasses="[{ ' text-theme fill-current': item.isRefined}, 'h-5 w-5']" />
+                                        <span class="ml-2" :class="{' text-theme': item.isRefined}">{{ item.label }}</span>
                                     </li>
                                 </ul>
                             </div>

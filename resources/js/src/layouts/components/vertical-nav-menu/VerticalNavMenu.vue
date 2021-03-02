@@ -27,12 +27,12 @@
       <div @mouseenter="mouseEnter" @mouseleave="mouseLeave">
 
         <!-- Header -->
-        <div class="header-sidebar flex items-end justify-between" slot="header">
+        <div style="background-color:#fff;" class="header-sidebar flex items-end justify-between" slot="header">
 
           <!-- Logo -->
           <router-link tag="div" class="vx-logo cursor-pointer flex items-center" to="/">
-            <logo class="w-10 mr-4 fill-current text-primary" />
-            <span class="vx-logo-text text-primary" v-show="isMouseEnter || !reduce" v-if="title">{{ title }}</span>
+            <img v-show="isMouseEnter || !reduce" src="@assets/images/pages/firmalogo.jpg" alt="login" class="mx-auto">
+           <span class="vx-logo-text  text-theme" v-show="isMouseEnter || !reduce" v-if="title"></span>
           </router-link>
           <!-- /Logo -->
 
@@ -49,7 +49,7 @@
                 id="btnVNavMenuMinToggler"
                 class="mr-0 cursor-pointer"
                 :icon="reduce ? 'CircleIcon' : 'DiscIcon'"
-                svg-classes="stroke-current text-primary"
+                svg-classes="stroke-current text-theme"
                 @click="toggleReduce(!reduce)" />
             </template>
           </div>

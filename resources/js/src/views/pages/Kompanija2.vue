@@ -311,9 +311,9 @@
           </vs-dropdown-->
 
           <!-- ADD NEW -->
-          <div class="p-3 mb-4 mr-4 rounded-lg cursor-pointer flex items-center justify-between text-lg font-medium text-base text-primary border border-solid border-primary" @click="setToken()">
+          <div class="p-3 mb-4 mr-4 rounded-lg cursor-pointer flex items-center justify-between text-lg font-medium text-base  text-theme border border-solid text-theme" @click="setToken()">
               <feather-icon icon="PlusIcon" svgClasses="h-4 w-4" />
-              <span  v-if="!popupActive" class="ml-2 text-base text-primary">Dodaj novi</span>
+              <span  v-if="!popupActive" class="ml-2 text-base  text-theme">Dodaj novi</span>
           </div>
         </div>
 
@@ -387,7 +387,7 @@
               <p class="product-price">{{ tr.mincijena }} KM</p>
             </vs-td>
             <vs-td class="whitespace-no-wrap">
-              <!--feather-icon icon="EditIcon" svgClasses="w-5 h-5 hover:text-primary stroke-current" @click.stop="editData(tr)" /-->
+              <!--feather-icon icon="EditIcon" svgClasses="w-5 h-5 hover: text-theme stroke-current" @click.stop="editData(tr)" /-->
               <feather-icon icon="TrashIcon" svgClasses="w-5 h-5 hover:text-danger stroke-current" class="ml-2" @click.stop="deleteData(tr.id)" />
             </vs-td>
 

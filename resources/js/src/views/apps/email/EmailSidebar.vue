@@ -40,9 +40,9 @@
             <div class="px-6 pb-2 flex flex-col">
 
                 <!-- inbox -->
-                <router-link tag="span" :to="`${baseUrl}/inbox`" class="flex justify-between items-center cursor-pointer" :class="{'text-primary': mailFilter == 'inbox'}">
+                <router-link tag="span" :to="`${baseUrl}/inbox`" class="flex justify-between items-center cursor-pointer" :class="{' text-theme': mailFilter == 'inbox'}">
                     <div class="flex items-center mb-2">
-                        <feather-icon icon="MailIcon" :svgClasses="[{'text-primary stroke-current': mailFilter == 'inbox'}, 'h-6 w-6']"></feather-icon>
+                        <feather-icon icon="MailIcon" :svgClasses="[{' text-theme stroke-current': mailFilter == 'inbox'}, 'h-6 w-6']"></feather-icon>
                         <span class="text-lg ml-3">Inbox</span>
                     </div>
                     <template v-if="emailMeta.unreadMails">
@@ -51,15 +51,15 @@
                 </router-link>
 
                 <!-- sent -->
-                <router-link tag="span" :to="`${baseUrl}/sent`" class="flex items-center mt-4 mb-2 cursor-pointer" :class="{'text-primary': mailFilter == 'sent'}">
-                    <feather-icon icon="SendIcon" :svgClasses="[{'text-primary stroke-current': mailFilter == 'sent'}, 'h-6 w-6']"></feather-icon>
+                <router-link tag="span" :to="`${baseUrl}/sent`" class="flex items-center mt-4 mb-2 cursor-pointer" :class="{' text-theme': mailFilter == 'sent'}">
+                    <feather-icon icon="SendIcon" :svgClasses="[{' text-theme stroke-current': mailFilter == 'sent'}, 'h-6 w-6']"></feather-icon>
                     <span class="text-lg ml-3">Sent</span>
                 </router-link>
 
                 <!-- draft -->
-                <router-link tag="span" :to="`${baseUrl}/draft`" class="flex justify-between items-center mt-4 cursor-pointer" :class="{'text-primary': mailFilter == 'draft'}">
+                <router-link tag="span" :to="`${baseUrl}/draft`" class="flex justify-between items-center mt-4 cursor-pointer" :class="{' text-theme': mailFilter == 'draft'}">
                     <div class="flex items-center mb-2">
-                        <feather-icon icon="Edit2Icon" :svgClasses="[{'text-primary stroke-current': mailFilter == 'draft'}, 'h-6 w-6']"></feather-icon>
+                        <feather-icon icon="Edit2Icon" :svgClasses="[{' text-theme stroke-current': mailFilter == 'draft'}, 'h-6 w-6']"></feather-icon>
                         <span class="text-lg ml-3">Draft</span>
                     </div>
                     <template v-if="emailMeta.draftMails">
@@ -68,15 +68,15 @@
                 </router-link>
 
                 <!-- starred -->
-                <router-link tag="span" :to="`${baseUrl}/starred`" class="flex items-center mt-4 mb-2 cursor-pointer" :class="{'text-primary': mailFilter == 'starred'}">
-                    <feather-icon icon="StarIcon" :svgClasses="[{'text-primary stroke-current': mailFilter == 'starred'}, 'h-6 w-6']"></feather-icon>
+                <router-link tag="span" :to="`${baseUrl}/starred`" class="flex items-center mt-4 mb-2 cursor-pointer" :class="{' text-theme': mailFilter == 'starred'}">
+                    <feather-icon icon="StarIcon" :svgClasses="[{' text-theme stroke-current': mailFilter == 'starred'}, 'h-6 w-6']"></feather-icon>
                     <span class="text-lg ml-3">Starred</span>
                 </router-link>
 
                 <!-- spam -->
-                <router-link tag="span" :to="`${baseUrl}/spam`" class="flex items-center justify-between items-center mt-4 cursor-pointer" :class="{'text-primary': mailFilter == 'spam'}">
+                <router-link tag="span" :to="`${baseUrl}/spam`" class="flex items-center justify-between items-center mt-4 cursor-pointer" :class="{' text-theme': mailFilter == 'spam'}">
                     <div class="flex items-center mb-2">
-                        <feather-icon icon="InfoIcon" :svgClasses="[{'text-primary stroke-current': mailFilter == 'spam'}, 'h-6 w-6']"></feather-icon>
+                        <feather-icon icon="InfoIcon" :svgClasses="[{' text-theme stroke-current': mailFilter == 'spam'}, 'h-6 w-6']"></feather-icon>
                         <span class="text-lg ml-3">Spam</span>
                     </div>
                     <template v-if="emailMeta.unreadMails">
@@ -85,8 +85,8 @@
                 </router-link>
 
                 <!-- trash -->
-                <router-link tag="span" :to="`${baseUrl}/trash`" class="flex items-center mt-4 mb-2 cursor-pointer" :class="{'text-primary': mailFilter == 'trash'}">
-                    <feather-icon icon="TrashIcon" :svgClasses="[{'text-primary stroke-current': mailFilter == 'trash'}, 'h-6 w-6']"></feather-icon>
+                <router-link tag="span" :to="`${baseUrl}/trash`" class="flex items-center mt-4 mb-2 cursor-pointer" :class="{' text-theme': mailFilter == 'trash'}">
+                    <feather-icon icon="TrashIcon" :svgClasses="[{' text-theme stroke-current': mailFilter == 'trash'}, 'h-6 w-6']"></feather-icon>
                     <span class="text-lg ml-3">Trash</span>
                 </router-link>
             </div>
@@ -96,7 +96,7 @@
                 <div class="email__lables-list">
                     <router-link tag="span" class="email__label flex items-center mb-4 cursor-pointer" v-for="(tag, index) in emailTags" :key="index" :to="`${baseUrl}/${tag.value}`">
                         <div class="ml-1 h-3 w-3 rounded-full mr-4" :class="'border-2 border-solid border-' + tag.color"></div>
-                        <span class="text-lg" :class="{'text-primary': mailFilter == tag.value}">{{ tag.text }}</span>
+                        <span class="text-lg" :class="{' text-theme': mailFilter == tag.value}">{{ tag.text }}</span>
                     </router-link>
                 </div>
             </div>

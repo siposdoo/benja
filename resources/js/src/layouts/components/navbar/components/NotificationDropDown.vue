@@ -30,7 +30,7 @@
         fixed
         bottom-0
         rounded-b-lg
-        text-primary
+         text-theme
         w-full
         p-2
         font-semibold

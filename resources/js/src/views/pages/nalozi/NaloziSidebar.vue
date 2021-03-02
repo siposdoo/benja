@@ -20,9 +20,9 @@
     v-model="isSidebarActiveLocal"
   >
     <div class="mt-6 flex items-center justify-between px-6">
-      <h4>
-        {{ Object.entries(this.data).length === 0 ? "Dodaj" : "Izmjeni" }}
-        Nalog
+      <h4 class="vs-component vs-button vs-button-primary vs-button-filled">
+        {{ Object.entries(this.data).length === 0 ? "Dodaj nalog" : "Izmjena naloga " }}
+        ({{nalogdata.naziv}})
       </h4>
       <feather-icon
         icon="XIcon"
@@ -38,7 +38,7 @@
       :settings="settings"
       :key="$vs.rtl"
     >
-      <vx-card class="mt-2" title="Info" title-color="primary">
+      <vx-card class="mt-2" title="Info" title-color="vs-button-primary">
         <div class="p-6 flex w-full bg-img vx-row">
           <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-1/4">
             <label for="example-datepicker">Naziv naloga</label>
@@ -137,7 +137,7 @@
           </div>
         </div>
       </vx-card>
-      <vx-card class="mt-2" title="Utovar" title-color="primary">
+      <vx-card class="mt-2" title="Utovar" >
         <div
           class="flex p-4 w-full bg-img vx-row"
           v-for="(input, k) in nalogdata.kompod"
@@ -213,7 +213,7 @@
           </div>
         </div>
       </vx-card>
-      <vx-card class="mt-2" title="Istovar" title-color="primary">
+      <vx-card class="mt-2" title="Istovar" >
         <div
           class="flex p-4 w-full bg-img vx-row vx-utoist"
           v-for="(input, k) in nalogdata.kompdo"
@@ -288,7 +288,7 @@
           </div>
         </div>
       </vx-card>
-      <vx-card class="mt-2" title="Komitent/Finansije" title-color="primary">
+      <vx-card class="mt-2" title="Komitent/Finansije" >
         <div class="p-6 flex w-full bg-img vx-row">
           <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-4/12">
             <label for="datepicker-lg">Komitent</label>
@@ -390,7 +390,7 @@
           </div>
         </div>
       </vx-card>
-      <vx-card class="mt-2" title="Detalji" title-color="primary">
+      <vx-card class="mt-2" title="Detalji" >
         <div class="p-6 flex w-full bg-img vx-row">
           <div class="vx-col w-full">
             <vs-input
@@ -428,7 +428,7 @@
         color="danger"
         @click="
           isSidebarActiveLocal = false;
-          initValues();
+          initValues2()
         "
         >Odustani</vs-button
       >
@@ -1073,8 +1073,54 @@ export default {
           app.errors = res.response.data.errors || {};
         });
     },
-    initValues() {},
-  },
+    initValues() {
+       
+    },initValues2() {
+ 
+        this.nalogdata.vozila= 0
+        this.nalogdata.naziv= null
+        this.nalogdata.vozac1= ""
+        this.nalogdata.vozac2= ""
+       this.nalogdata.kamion= ""
+        this.nalogdata.komitent= null
+        this.nalogdata.prikolica= ""
+        this.nalogdata.placena= null
+        this.nalogdata.polaziste= null
+        this.nalogdata.iznoskm= null
+        this.nalogdata.iznoseur= null
+        this.nalogdata.brfak= ""
+        this.nalogdata.izvoznocarinjenje= ""
+        this.nalogdata.grprelaz= ""
+        this.nalogdata.uvoznocarinjenje= ""
+        this.nalogdata.kontakt= ""
+        this.nalogdata.napomene= ""
+        this.nalogdata.gmaplink= ""
+        this.nalogdata.proizvodjac= ""
+       this.nalogdata.datumutovara= null
+        this.nalogdata.brvozila= null
+        this.nalogdata.kompod= [
+          {
+            vozila: "",
+            lokacija: "",
+            adresa: "",
+            grad: "",
+            drzava: "",
+            napomena: "",
+          }
+        ] 
+        this.nalogdata.kompdo= [
+          {
+            vozila: "",
+            lokacija: "",
+            adresa: "",
+            grad: "",
+            drzava: "",
+            napomena: "",
+          }
+        ] 
+      }      
+    },
+   
 };
 </script>
 

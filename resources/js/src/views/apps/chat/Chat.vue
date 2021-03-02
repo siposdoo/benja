@@ -30,7 +30,7 @@
 
                 <!-- ACTIVE CHATS LIST -->
                 <div class="chat__chats-list mb-8">
-                    <h3 class="text-primary mb-5 px-4">Chats</h3>
+                    <h3 class=" text-theme mb-5 px-4">Chats</h3>
                     <ul class="chat__active-chats bordered-items">
                         <li class="cursor-pointer" v-for="(contact, index) in chatContacts" :key="index" @click="updateActiveChatUser(contact.uid)">
                             <chat-contact showLastMsg :contact="contact" :lastMessaged="chatLastMessaged(contact.uid).time" :unseenMsg="chatUnseenMessages(contact.uid)" :isActiveChatUser="isActiveChatUser(contact.uid)"></chat-contact>
@@ -41,7 +41,7 @@
 
                 <!-- CONTACTS LIST -->
                 <div class="chat__contacts">
-                    <h3 class="text-primary mb-5 px-4">Contacts</h3>
+                    <h3 class=" text-theme mb-5 px-4">Contacts</h3>
                     <ul class="chat__contacts bordered-items">
                         <li class="cursor-pointer" v-for="contact in contacts" :key="contact.uid" @click="updateActiveChatUser(contact.uid)">
                             <chat-contact :contact="contact"></chat-contact>

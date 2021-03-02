@@ -50,7 +50,7 @@
                   <span>{{ item_data.brand }}</span>
                 </p>
                 <p class="flex items-center flex-wrap">
-                  <span class="text-2xl leading-none font-medium text-primary mr-4 mt-2">${{ item_data.price }}</span>
+                  <span class="text-2xl leading-none font-medium  text-theme mr-4 mt-2">${{ item_data.price }}</span>
                   <span class="pl-4 mr-2 mt-2 border border-solid d-theme-border-grey-light border-t-0 border-b-0 border-r-0"><star-rating :show-rating="false" :rating="item_data.rating" :star-size="20" read-only /></span>
                   <span class="cursor-pointer leading-none mt-2">424 ratings</span>
                 </p>
@@ -175,21 +175,21 @@
             <div class="vx-row">
               <div class="vx-col md:w-1/3 w-full">
                 <div class="w-64 mx-auto mb-16 md:mb-0">
-                  <feather-icon icon="AwardIcon" svgClasses="h-12 w-12 text-primary stroke-current" class="block mb-4" />
+                  <feather-icon icon="AwardIcon" svgClasses="h-12 w-12  text-theme stroke-current" class="block mb-4" />
                   <span class="font-semibold text-lg">100% Original</span>
                   <p class="mt-2">Chocolate bar candy canes ice cream toffee cookie halvah.</p>
                 </div>
               </div>
               <div class="vx-col md:w-1/3 w-full">
                 <div class="w-64 mx-auto mb-16 md:mb-0">
-                  <feather-icon icon="ClockIcon" svgClasses="h-12 w-12 text-primary stroke-current" class="block mb-4" />
+                  <feather-icon icon="ClockIcon" svgClasses="h-12 w-12  text-theme stroke-current" class="block mb-4" />
                   <span class="font-semibold text-lg">10 Day Replacement</span>
                   <p class="mt-2">Marshmallow biscuit donut dragée fruitcake wafer.</p>
                 </div>
               </div>
               <div class="vx-col md:w-1/3 w-full">
                 <div class="w-64 mx-auto">
-                  <feather-icon icon="ShieldIcon" svgClasses="h-12 w-12 text-primary stroke-current" class="block mb-4" />
+                  <feather-icon icon="ShieldIcon" svgClasses="h-12 w-12  text-theme stroke-current" class="block mb-4" />
                   <span class="font-semibold text-lg">1 Year Warranty</span>
                   <p class="mt-2">Cotton candy gingerbread cake I love sugar sweet.</p>
                 </div>
@@ -226,7 +226,7 @@
               <!-- Item Meta -->
               <div class="item-meta">
                 <star-rating :show-rating="false" :rating="item.rating" :star-size="14" class="justify-center" read-only />
-                <p class="text-lg font-medium text-primary">${{ item.price }}</p>
+                <p class="text-lg font-medium  text-theme">${{ item.price }}</p>
               </div>
             </swiper-slide>
             <div class="swiper-button-prev" slot="button-prev"></div>

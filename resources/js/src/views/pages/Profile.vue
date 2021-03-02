@@ -129,7 +129,7 @@
                             <!-- FEED CONTENT -->
                             <p class="mt-4">{{ feed.content }}</p>
                             <div class="tags-container" v-if="feed.tags.length">
-                                <span v-for="tag in feed.tags" :key="tag" id="tag" class="mr-2 text-primary">#{{tag}}</span>
+                                <span v-for="tag in feed.tags" :key="tag" id="tag" class="mr-2  text-theme">#{{tag}}</span>
                             </div>
                             <small class="mt-3 inline-block">{{ feed.time | date(true) }}</small>
                         </li>
@@ -166,7 +166,7 @@
                                 <li class="post-media m-1 w-full" v-for="(media, mediaIdex) in post.media.slice(0, 2)" :key="mediaIdex">
                                     <img class="responsive rounded" :src="media.img" alt="user-upload" v-if="mediaType(media) == 'image'">
                                     <video-player ref="player" class="media-video-player" :options="playerOptions(media)" v-else-if="mediaType(media) == 'video'" v-once />
-                                    <span class="text-lg text-primary" v-else>Unknown Media Type</span>
+                                    <span class="text-lg  text-theme" v-else>Unknown Media Type</span>
                                 </li>
                             </ul>
                             <span class="flex justify-end" v-if="post.media.length > 2">

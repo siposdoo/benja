@@ -15,7 +15,7 @@ export const colors = {
   warning : '#FF9F43',
   dark    : '#1E1E1E'
 }
-$primary: '#953229';
+ 
 // CONFIGS
 const themeConfig = {
   disableCustomizer : true,       // options[Boolean] : true, false(default)

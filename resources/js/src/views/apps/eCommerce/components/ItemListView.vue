@@ -22,7 +22,7 @@
                 <div class="vx-col sm:w-1/2">
                     <div class="p-4 pt-6">
                         <slot name="item-meta">
-                            <h6 class="item-name font-semibold mb-1 hover:text-primary cursor-pointer" @click="navigate_to_detail_view">{{ item.name }}</h6>
+                            <h6 class="item-name font-semibold mb-1 hover: text-theme cursor-pointer" @click="navigate_to_detail_view">{{ item.name }}</h6>
                             <p class="text-sm mb-4">By <span class="font-semibold cursor-pointer">{{ item.brand }}</span></p>
                             <p class="item-description text-sm">{{ item.description }}</p>
                         </slot>
