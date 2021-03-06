@@ -12,6 +12,7 @@ import App from "./App.vue";
 // Vuesax Component Framework
 import Vuesax from "vuesax";
 import PrimeVue from 'primevue/config';
+Vue.use(require('vue-moment'));
 
 Vue.use(PrimeVue);
 Vue.use(Vuesax);

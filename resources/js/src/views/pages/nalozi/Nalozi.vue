@@ -121,6 +121,7 @@ import moduleDataList from "@/store/data-list/moduleDataList.js";
 import { AgGridVue } from "ag-grid-vue";
 import BtnCellRenderer from "./btn-cell-renderer.js";
 import AG_GRID_LOCALE_EN from "./locale.sr.js";
+import moment from "moment";
 import "@sass/vuexy/extraComponents/agGridStyleOverride.scss";
 
 export default {
@@ -170,7 +171,36 @@ export default {
         {
           headerName: "Datum utovara",
           field: "datumutovara",
-          filter: "agNumberColumnFilter",
+          filter: "agDateColumnFilter",
+            filterParams: {
+                // provide comparator function
+                comparator: (filterLocalDateAtMidnight, cellValue) => {
+                    const dateAsString = cellValue;
+                     if (dateAsString == null) {
+                        return 0;
+                    }
+
+                    // In the example application, dates are stored as dd/mm/yyyy
+                    // We create a Date object for comparison against the filter date
+                    const dateParts = dateAsString.split('-');
+                    const day = Number(dateParts[2]);
+                    const month = Number(dateParts[1]) - 1;
+                    const year = Number(dateParts[0]);
+                    const cellDate = new Date(year, month, day);
+
+                    // Now that both parameters are Date objects, we can compare
+                    if (cellDate < filterLocalDateAtMidnight) {
+                        return -1;
+                    } else if (cellDate > filterLocalDateAtMidnight) {
+                        return 1;
+                    }
+                    return 0;
+                }
+            },
+           cellRenderer: data => {
+             moment.locale('sr')
+    return data.value != undefined ? moment(data.value).format("L", "sr") : null;
+  },
           width: 175,
         },
 
