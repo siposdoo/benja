@@ -44,7 +44,7 @@ const router = new Router({
         // Theme Routes
         // =============================================================================
         
-        {
+        /*{
           path: '/',
           name: 'dashboard-shop',
           component: () => import('./views/DashboardAnalytics.vue'),
@@ -52,7 +52,7 @@ const router = new Router({
             rule: 'editor',
             allowAnonymous: true
           }
-        },
+        },*/
         {
           path: '/dobavljaci',
           name: 'app-',

@@ -32,15 +32,6 @@ export default [
         
       },
       {
-         
-       
-        url: '/',
-        name: 'Početna',
-        icon: 'HomeIcon',
-        i18n: 'Početna',
-        
-      },
-      {
         url: '/nalozi',
         name: 'Nalozi',
         icon: 'MapIcon',

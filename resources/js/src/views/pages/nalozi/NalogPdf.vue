@@ -59,6 +59,8 @@
         </div>
         <div ref="utovar" class="vx-col w-full mt-3">
           <h4>Utovar</h4>
+          <template lang="html">
+  <div>
           <vs-table hoverFlat :data="invoiceData.tasks">
             <!-- HEADER -->
             <template slot="thead">
@@ -74,7 +76,7 @@
             <template
               :class="(index + 2) % 2 === 0 ? 'sverow' : ''"
               v-for="(utovar, index) in utovari"
-            >
+            :slot-scope="data" >
               <vs-tr
                 :class="
                   (index + 1) % 2 === 0
@@ -90,22 +92,19 @@
                 <vs-td utovar:utovar.adresa="">{{ utovar.adresa }}</vs-td>
                 <vs-td utovar:utovar.grad="">{{ utovar.grad }}</vs-td>
                 <vs-td utovar:utovar.drzava="">{{ utovar.drzava }}</vs-td>
-              </vs-tr>
+            
 
-              <vs-tr
-                :class="(index + 1) % 2 === 0 ? 'rowui zadnja' : 'zadnja'"
-                :key="index+100"
-              >
-                <vs-td colspan="5" utovar:utovar.drzava="">
-                  <feather-icon
-                    icon="AlertIcon"
-                    svgClasses="h-4 w-4"
-                  ></feather-icon
-                  >Napomena: {{ utovar.napomena }}</vs-td
-                >
-              </vs-tr>
+             
+                
+                   <template class="expand-user" slot="expand">
+                   <div>{{ utovar.napomena }}</div>
+                  </template>
+                   </vs-tr>
+             
             </template>
           </vs-table>
+            </div>
+</template>
         </div>
         <div class="vx-col w-full mt-3">
           <h4>Istovar</h4>
@@ -190,7 +189,7 @@
         <div class="p-3 vx-row">
           <div class="vx-col p-0 w-full boxn-data">
             <p class="bg-titme">Napomena</p>
-            <p class="bg-cont">{{ products[0].napomene }}</p>
+            <div class="bg-cont">{{ products[0].napomene }}</div>
           </div>
         </div>
 

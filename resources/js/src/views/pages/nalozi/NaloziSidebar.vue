@@ -21,8 +21,12 @@
   >
     <div class="mt-6 flex items-center justify-between px-6">
       <h4 class="vs-component vs-button vs-button-primary vs-button-filled">
-        {{ Object.entries(this.data).length === 0 ? "Dodaj nalog" : "Izmjena naloga " }}
-        ({{nalogdata.naziv}})
+        {{
+          Object.entries(this.data).length === 0
+            ? "Dodaj nalog"
+            : "Izmjena naloga "
+        }}
+        ({{ nalogdata.naziv }})
       </h4>
       <feather-icon
         icon="XIcon"
@@ -98,7 +102,7 @@
           </div>
           <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-1/4">
             <label for="example-datepicker">Vozač 2</label>
-           <vue-simple-suggest
+            <vue-simple-suggest
               :filter-by-query="true"
               placeholder="npr. Ime i Prezime"
               class="w-full"
@@ -111,7 +115,7 @@
           </div>
           <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-1/4">
             <label for="example-datepicker">Kamion</label>
-             <vue-simple-suggest
+            <vue-simple-suggest
               :filter-by-query="true"
               placeholder="npr. Man TGA"
               class="w-full"
@@ -124,7 +128,7 @@
           </div>
           <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-1/4">
             <label for="example-datepicker">Prikolica</label>
-             <vue-simple-suggest
+            <vue-simple-suggest
               :filter-by-query="true"
               placeholder="npr. Prikolica plava"
               class="w-full"
@@ -137,7 +141,7 @@
           </div>
         </div>
       </vx-card>
-      <vx-card class="mt-2" title="Utovar" >
+      <vx-card class="mt-2" title="Utovar">
         <div
           class="flex p-4 w-full bg-img vx-row"
           v-for="(input, k) in nalogdata.kompod"
@@ -188,12 +192,38 @@
 
             <div class="vx-col w-10/12">
               <label for="datepicker-lg">Napomena</label>
-              <vs-textarea
-                v-model="input.napomena"
+              <quill-editor
+                :options="editorOption"
                 placeholder="Reference, vozilo, broj šasije, tablice"
                 class="w-full"
                 v-validate="'required'"
-              />
+                v-model="input.napomena"
+              >
+                <div id="toolbar" slot="toolbar">
+                  <!-- Add a bold button -->
+                  <button class="ql-bold">Bold</button>
+                  <button class="ql-italic">Italic</button>
+
+                  <!-- Add font size dropdown -->
+                  <select class="ql-size">
+                    <option value="small"></option>
+                    <!-- Note a missing, thus falsy value, is used to reset to default -->
+                    <option selected></option>
+                    <option value="large"></option>
+                    <option value="huge"></option>
+                  </select>
+
+                  <select class="ql-font">
+                    <option selected="selected"></option>
+                    <option value="serif"></option>
+                    <option value="monospace"></option>
+                  </select>
+
+                  <!-- Add subscript and superscript buttons -->
+                  <button class="ql-script" value="sub"></button>
+                  <button class="ql-script" value="super"></button>
+                </div>
+              </quill-editor>
             </div>
             <div class="vx-col w-2/12">
               <vs-button
@@ -213,7 +243,7 @@
           </div>
         </div>
       </vx-card>
-      <vx-card class="mt-2" title="Istovar" >
+      <vx-card class="mt-2" title="Istovar">
         <div
           class="flex p-4 w-full bg-img vx-row vx-utoist"
           v-for="(input, k) in nalogdata.kompdo"
@@ -288,7 +318,7 @@
           </div>
         </div>
       </vx-card>
-      <vx-card class="mt-2" title="Komitent/Finansije" >
+      <vx-card class="mt-2" title="Komitent/Finansije">
         <div class="p-6 flex w-full bg-img vx-row">
           <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-4/12">
             <label for="datepicker-lg">Komitent</label>
@@ -390,7 +420,7 @@
           </div>
         </div>
       </vx-card>
-      <vx-card class="mt-2" title="Detalji" >
+      <vx-card class="mt-2" title="Detalji">
         <div class="p-6 flex w-full bg-img vx-row">
           <div class="vx-col w-full">
             <vs-input
@@ -428,7 +458,7 @@
         color="danger"
         @click="
           isSidebarActiveLocal = false;
-          initValues2()
+          initValues2();
         "
         >Odustani</vs-button
       >
@@ -442,6 +472,12 @@ import "vue-simple-suggest/dist/styles.css"; // Optional CSS
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
+// require styles
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
+
+import { quillEditor } from "vue-quill-editor";
 
 export default {
   props: {
@@ -455,12 +491,18 @@ export default {
     },
   },
   components: {
+    quillEditor,
     VuePerfectScrollbar,
     VueSimpleSuggest,
     "v-select": vSelect,
   },
   data() {
     return {
+      editorOption: {
+        modules: {
+          toolbar: "#toolbar",
+        },
+      },
       value: "",
       formatted: "",
       kontaktiLista: [],
@@ -968,7 +1010,7 @@ export default {
     removedo(index) {
       this.nalogdata.kompdo.splice(index, 1);
     },
-     getPrikolice() {
+    getPrikolice() {
       this.$http
         .get("/api/auth/prikolice", {
           headers: {
@@ -1013,7 +1055,7 @@ export default {
           console.log(error);
         });
     },
-        getKamioni() {
+    getKamioni() {
       this.$http
         .get("/api/auth/kamioni", {
           headers: {
@@ -1073,54 +1115,51 @@ export default {
           app.errors = res.response.data.errors || {};
         });
     },
-    initValues() {
-       
-    },initValues2() {
- 
-        this.nalogdata.vozila= 0
-        this.nalogdata.naziv= null
-        this.nalogdata.vozac1= ""
-        this.nalogdata.vozac2= ""
-       this.nalogdata.kamion= ""
-        this.nalogdata.komitent= null
-        this.nalogdata.prikolica= ""
-        this.nalogdata.placena= null
-        this.nalogdata.polaziste= null
-        this.nalogdata.iznoskm= null
-        this.nalogdata.iznoseur= null
-        this.nalogdata.brfak= ""
-        this.nalogdata.izvoznocarinjenje= ""
-        this.nalogdata.grprelaz= ""
-        this.nalogdata.uvoznocarinjenje= ""
-        this.nalogdata.kontakt= ""
-        this.nalogdata.napomene= ""
-        this.nalogdata.gmaplink= ""
-        this.nalogdata.proizvodjac= ""
-       this.nalogdata.datumutovara= null
-        this.nalogdata.brvozila= null
-        this.nalogdata.kompod= [
-          {
-            vozila: "",
-            lokacija: "",
-            adresa: "",
-            grad: "",
-            drzava: "",
-            napomena: "",
-          }
-        ] 
-        this.nalogdata.kompdo= [
-          {
-            vozila: "",
-            lokacija: "",
-            adresa: "",
-            grad: "",
-            drzava: "",
-            napomena: "",
-          }
-        ] 
-      }      
+    initValues() {},
+    initValues2() {
+      this.nalogdata.vozila = 0;
+      this.nalogdata.naziv = null;
+      this.nalogdata.vozac1 = "";
+      this.nalogdata.vozac2 = "";
+      this.nalogdata.kamion = "";
+      this.nalogdata.komitent = null;
+      this.nalogdata.prikolica = "";
+      this.nalogdata.placena = null;
+      this.nalogdata.polaziste = null;
+      this.nalogdata.iznoskm = null;
+      this.nalogdata.iznoseur = null;
+      this.nalogdata.brfak = "";
+      this.nalogdata.izvoznocarinjenje = "";
+      this.nalogdata.grprelaz = "";
+      this.nalogdata.uvoznocarinjenje = "";
+      this.nalogdata.kontakt = "";
+      this.nalogdata.napomene = "";
+      this.nalogdata.gmaplink = "";
+      this.nalogdata.proizvodjac = "";
+      this.nalogdata.datumutovara = null;
+      this.nalogdata.brvozila = null;
+      this.nalogdata.kompod = [
+        {
+          vozila: "",
+          lokacija: "",
+          adresa: "",
+          grad: "",
+          drzava: "",
+          napomena: "",
+        },
+      ];
+      this.nalogdata.kompdo = [
+        {
+          vozila: "",
+          lokacija: "",
+          adresa: "",
+          grad: "",
+          drzava: "",
+          napomena: "",
+        },
+      ];
     },
-   
+  },
 };
 </script>
 

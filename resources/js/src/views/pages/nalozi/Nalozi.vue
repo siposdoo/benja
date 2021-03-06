@@ -9,13 +9,108 @@
 
 <template>
   <div id="data-list-thumb-view" class="data-list-container">
+    <vx-card>
+      <!-- TABLE ACTION ROW -->
+      <div class="flex flex-wrap justify-between items-center">
+        <!-- ITEMS PER PAGE -->
+        <div class="mb-4 md:mb-0 mr-4 ag-grid-table-actions-left">
+          <div
+            class="p-3 mb-4 mr-4 rounded-lg cursor-pointer flex items-center justify-between text-lg font-medium text-base text-theme border border-solid text-theme"
+            @click="addNewData"
+          >
+            <feather-icon icon="PlusIcon" svgClasses="h-4 w-4" />
+            <span class="ml-2 text-base text-theme">Dodaj {{ getTemKm }}</span>
+          </div>
+          <vs-dropdown vs-trigger-click class="cursor-pointer">
+            <div
+              class="p-1 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
+            >
+              <span class="mr-2"
+                >{{
+                  currentPage * paginationPageSize - (paginationPageSize - 1)
+                }}
+                -
+                {{
+                  products.length - currentPage * paginationPageSize > 0
+                    ? currentPage * paginationPageSize
+                    : products.length
+                }}
+                od {{ products.length }}</span
+              >
+              <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
+            </div>
+            <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
+            <vs-dropdown-menu>
+              <vs-dropdown-item @click="gridApi.paginationSetPageSize(3)">
+                <span>3</span>
+              </vs-dropdown-item>
+              <vs-dropdown-item @click="gridApi.paginationSetPageSize(20)">
+                <span>20</span>
+              </vs-dropdown-item>
+              <vs-dropdown-item @click="gridApi.paginationSetPageSize(50)">
+                <span>50</span>
+              </vs-dropdown-item>
+              <vs-dropdown-item @click="gridApi.paginationSetPageSize(100)">
+                <span>100</span>
+              </vs-dropdown-item>
+              <vs-dropdown-item @click="gridApi.paginationSetPageSize(150)">
+                <span>150</span>
+              </vs-dropdown-item>
+            </vs-dropdown-menu>
+          </vs-dropdown>
+        </div>
+
+        <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
+        <div
+          class="flex flex-wrap items-center justify-between ag-grid-table-actions-right"
+        >
+          <vs-input
+            class="mb-4 md:mb-0 mr-4"
+            v-model="searchQuery"
+            @input="updateSearchQuery"
+            placeholder="Traži..."
+          />
+          <vs-button class="mb-4 md:mb-0" @click="exportCsv()"
+            >Izvezi kao CSV</vs-button
+          >
+        </div>
+      </div>
+      <ag-grid-vue
+        ref="agGridTable"
+        :gridOptions="gridOptions"
+        class="ag-theme-material w-100 my-4 ag-grid-table"
+        :columnDefs="columnDefs"
+        :defaultColDef="defaultColDef"
+        :rowData="products"
+        rowSelection="multiple"
+        colResizeDefault="shift"
+        :animateRows="true"
+        :floatingFilter="true"
+        :localeText="localeText"
+        :pagination="true"
+        :paginationPageSize="paginationPageSize"
+        :suppressPaginationPanel="true"
+        :enableRtl="$vs.rtl"
+      >
+      </ag-grid-vue>
+            <div class="flex flex-wrap justify-between items-center">
+              <p><b>Ukupno vozila: {{getTempVozila}}</b></p>
+              <p><b>Ukupno KM: {{getTemKm}}</b></p>
+              <p><b>Ukupno EUR: {{getTempEU}}</b></p>
+            </div>
+      <vs-pagination
+        :total="totalPages"
+        :max="maxPageNumbers"
+        v-model="currentPage"
+      />
+    </vx-card>
     <data-view-sidebar
       :isSidebarActive="addNewDataSidebar"
       @closeSidebar="toggleDataSidebar"
       :data="sidebarData"
     />
 
-    <vs-table
+    <!--vs-table
       ref="table"
       multiple
       v-model="selected"
@@ -70,8 +165,8 @@
             </vs-dropdown-menu>
           </vs-dropdown>
  -->
-          <!-- ADD NEW -->
-          <div
+    <!-- ADD NEW -->
+    <!--div
             class="p-3 mb-4 mr-4 rounded-lg cursor-pointer flex items-center justify-between text-lg font-medium text-base  text-theme border border-solid text-theme"
             @click="addNewData"
           >
@@ -81,7 +176,7 @@
         </div>
 
         <!-- ITEMS PER PAGE -->
-        <vs-dropdown vs-trigger-click class="cursor-pointer mb-4 mr-4">
+    <!--vs-dropdown vs-trigger-click class="cursor-pointer mb-4 mr-4">
           <div
             class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
           >
@@ -97,7 +192,7 @@
             <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
           </div>
           <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
-          <vs-dropdown-menu>
+    <!--vs-dropdown-menu>
             <vs-dropdown-item @click="itemsPerPage = 10">
               <span>10</span>
             </vs-dropdown-item>
@@ -183,7 +278,7 @@
           </vs-tr>
         </tbody>
       </template>
-    </vs-table>
+    </vs-table-->
   </div>
 </template>
 
@@ -191,36 +286,470 @@
 import DataViewSidebar from "./NaloziSidebar";
 
 import moduleDataList from "@/store/data-list/moduleDataList.js";
+import { AgGridVue } from "ag-grid-vue";
+import BtnCellRenderer from "./btn-cell-renderer.js";
+import AG_GRID_LOCALE_EN from "./locale.sr.js";
+import "@sass/vuexy/extraComponents/agGridStyleOverride.scss";
 
 export default {
   components: {
     DataViewSidebar,
+    AgGridVue,
+    btnCellRenderer: BtnCellRenderer,
   },
   data() {
     return {
       selected: [],
       products: [],
-      itemsPerPage: 10,
+      tempKm: 0,
+      tempEU: 0,
+      tempVozila: 0,
+      itemsPerPage: 3,
+      localeText: null,
       isMounted: false,
       addNewDataSidebar: false,
       sidebarData: {},
+      searchQuery: "",
+      gridOptions: {},
+      maxPageNumbers: 7,
+      gridApi: null,
+      defaultColDef: {
+        sortable: true,
+        editable: false,
+        resizable: true,
+        suppressMenu: false,
+      },
+      columnDefs: [
+        {
+          headerName: "#ID",
+          field: "id",
+          width: 80,
+          pinned: "left",
+          filter: "agNumberColumnFilter",
+          headerCheckboxSelectionFilteredOnly: true,
+        },
+        {
+          headerName: "Naziv naloga",
+          field: "naziv",
+          filter: true,
+          width: 250,
+          pinned: "left",
+        },
+        {
+          headerName: "Datum utovara",
+          field: "datumutovara",
+          filter: "agNumberColumnFilter",
+          width: 175,
+        },
+
+        {
+          headerName: "Komitent",
+          field: "kompanija.name",
+          filter: true,
+          width: 350,
+        },
+        {
+          headerName: "Kontakt",
+          field: "kontakt",
+          filter: true,
+          width: 175,
+        },
+        {
+          headerName: "Vozač",
+          field: "vozac1",
+          filter: true,
+          width: 150,
+        },
+        {
+          headerName: "Br.Vozila",
+          field: "vozila",
+          filter: "agNumberColumnFilter",
+          width: 110,
+        },
+        {
+          headerName: "Iznos KM",
+          field: "iznoskm",
+          filter: "agNumberColumnFilter",
+          enableValue: true,
+          width: 120,
+          pinnedRowCellRenderer: function (params) {
+            return "<strong>" + params.data.iznoskm + "</strong>";
+          },
+          filterParams: {
+            applyMiniFilterWhileTyping: true,
+          },
+        },
+        {
+          headerName: "Iznos EU",
+          field: "iznoseur",
+          enableValue: true,
+          filter: "agNumberColumnFilter",
+          width: 120,
+          filterParams: {
+            applyMiniFilterWhileTyping: true,
+          },
+        },
+      ],
+      frameworkComponents: null,
     };
   },
+  beforeMount() {
+    this.localeText = {
+      // Set Filter
+      selectAll: "(Izaberi sve)",
+      selectAllSearchResults: "(oznaci sve rezultate pretrage)",
+      searchOoo: "Trazi...",
+      blanks: "(Prazno)",
+      noMatches: "Nema podudaranja",
+
+      // Number Filter & Text Filter
+      filterOoo: "Filter...",
+      equals: "Jednaki",
+      notEqual: "Nisu jednaki",
+      empty: "Izaberi jedan",
+
+      // Number Filter
+      lessThan: "Manje od",
+      greaterThan: "Veće od",
+      lessThanOrEqual: "Manje od ili jednako",
+      greaterThanOrEqual: "Veće od ili jednako",
+      inRange: "U rasponu",
+      inRangeStart: "do",
+      inRangeEnd: "od",
+
+      // Text Filter
+      contains: "Sadrži",
+      notContains: "Ne sadrži",
+      startsWith: "Počinje sa",
+      endsWith: "Završava sa",
+
+      // Date Filter
+      dateFormatOoo: "yyyy-mm-dd",
+
+      // Filter Conditions
+      andCondition: "I",
+      orCondition: "ILI",
+
+      // Filter Buttons
+      applyFilter: "Primjeni",
+      resetFilter: "Reset",
+      clearFilter: "Očisti",
+      cancelFilter: "Odustani",
+
+      // Filter Titles
+      textFilter: "Text Filter",
+      numberFilter: "Number Filter",
+      dateFilter: "Date Filter",
+      setFilter: "Set Filter",
+
+      // Side Bar
+      columns: "Columns",
+      filters: "Filters",
+
+      // columns tool panel
+      pivotMode: "Pivot Mode",
+      groups: "Row Groups",
+      rowGroupColumnsEmptyMessage: "Drag here to set row groups",
+      values: "Values",
+      valueColumnsEmptyMessage: "Drag here to aggregate",
+      pivots: "Column Labels",
+      pivotColumnsEmptyMessage: "Drag here to set column labels",
+
+      // Header of the Default Group Column
+      group: "Group",
+
+      // Other
+      loadingOoo: "Loading...",
+      noRowsToShow: "No Rows To Show",
+      enabled: "Enabled",
+
+      // Menu
+      pinColumn: "Pin Column",
+      pinLeft: "Pin Left",
+      pinRight: "Pin Right",
+      noPin: "No Pin",
+      valueAggregation: "Value Aggregation",
+      autosizeThiscolumn: "Autosize This Column",
+      autosizeAllColumns: "Autosize All Columns",
+      groupBy: "Group by",
+      ungroupBy: "Un-Group by",
+      resetColumns: "Reset Columns",
+      expandAll: "Expand All",
+      collapseAll: "Close All",
+      copy: "Copy",
+      ctrlC: "Ctrl+C",
+      copyWithHeaders: "Copy With Headers",
+      paste: "Paste",
+      ctrlV: "Ctrl+V",
+      export: "Export",
+      csvExport: "CSV Export",
+      excelExport: "Excel Export (.xlsx)",
+      excelXmlExport: "Excel Export (.xml)",
+
+      // Enterprise Menu Aggregation and Status Bar
+      sum: "Sum",
+      min: "Min",
+      max: "Max",
+      none: "None",
+      count: "Count",
+      avg: "Average",
+      filteredRows: "Filtered",
+      selectedRows: "Selected",
+      totalRows: "Total Rows",
+      totalAndFilteredRows: "Rows",
+      more: "More",
+      to: "to",
+      of: "of",
+      page: "Page",
+      nextPage: "Next Page",
+      lastPage: "Last Page",
+      firstPage: "First Page",
+      previousPage: "Previous Page",
+
+      // Enterprise Menu (Charts)
+      pivotChartAndPivotMode: "Pivot Chart & Pivot Mode",
+      pivotChart: "Pivot Chart",
+      chartRange: "Chart Range",
+
+      columnChart: "Column",
+      groupedColumn: "Grouped",
+      stackedColumn: "Stacked",
+      normalizedColumn: "100% Stacked",
+
+      barChart: "Bar",
+      groupedBar: "Grouped",
+      stackedBar: "Stacked",
+      normalizedBar: "100% Stacked",
+
+      pieChart: "Pie",
+      pie: "Pie",
+      doughnut: "Doughnut",
+
+      line: "Line",
+
+      xyChart: "X Y (Scatter)",
+      scatter: "Scatter",
+      bubble: "Bubble",
+
+      areaChart: "Area",
+      area: "Area",
+      stackedArea: "Stacked",
+      normalizedArea: "100% Stacked",
+
+      histogramChart: "Histogram",
+
+      // Charts
+      pivotChartTitle: "Pivot Chart",
+      rangeChartTitle: "Range Chart",
+      settings: "Settings",
+      data: "Data",
+      format: "Format",
+      categories: "Categories",
+      defaultCategory: "(None)",
+      series: "Series",
+      xyValues: "X Y Values",
+      paired: "Paired Mode",
+      axis: "Axis",
+      navigator: "Navigator",
+      color: "Color",
+      thickness: "Thickness",
+      xType: "X Type",
+      automatic: "Automatic",
+      category: "Category",
+      number: "Number",
+      time: "Time",
+      xRotation: "X Rotation",
+      yRotation: "Y Rotation",
+      ticks: "Ticks",
+      width: "Width",
+      height: "Height",
+      length: "Length",
+      padding: "Padding",
+      spacing: "Spacing",
+      chart: "Chart",
+      title: "Title",
+      titlePlaceholder: "Chart title - double click to edit",
+      background: "Background",
+      font: "Font",
+      top: "Top",
+      right: "Right",
+      bottom: "Bottom",
+      left: "Left",
+      labels: "Labels",
+      size: "Size",
+      minSize: "Minimum Size",
+      maxSize: "Maximum Size",
+      legend: "Legend",
+      position: "Position",
+      markerSize: "Marker Size",
+      markerStroke: "Marker Stroke",
+      markerPadding: "Marker Padding",
+      itemSpacing: "Item Spacing",
+      itemPaddingX: "Item Padding X",
+      itemPaddingY: "Item Padding Y",
+      layoutHorizontalSpacing: "Horizontal Spacing",
+      layoutVerticalSpacing: "Vertical Spacing",
+      strokeWidth: "Stroke Width",
+      offset: "Offset",
+      offsets: "Offsets",
+      tooltips: "Tooltips",
+      callout: "Callout",
+      markers: "Markers",
+      shadow: "Shadow",
+      blur: "Blur",
+      xOffset: "X Offset",
+      yOffset: "Y Offset",
+      lineWidth: "Line Width",
+      normal: "Normal",
+      bold: "Bold",
+      italic: "Italic",
+      boldItalic: "Bold Italic",
+      predefined: "Predefined",
+      fillOpacity: "Fill Opacity",
+      strokeOpacity: "Line Opacity",
+      histogramBinCount: "Bin count",
+      columnGroup: "Column",
+      barGroup: "Bar",
+      pieGroup: "Pie",
+      lineGroup: "Line",
+      scatterGroup: "X Y (Scatter)",
+      areaGroup: "Area",
+      histogramGroup: "Histogram",
+      groupedColumnTooltip: "Grouped",
+      stackedColumnTooltip: "Stacked",
+      normalizedColumnTooltip: "100% Stacked",
+      groupedBarTooltip: "Grouped",
+      stackedBarTooltip: "Stacked",
+      normalizedBarTooltip: "100% Stacked",
+      pieTooltip: "Pie",
+      doughnutTooltip: "Doughnut",
+      lineTooltip: "Line",
+      groupedAreaTooltip: "Area",
+      stackedAreaTooltip: "Stacked",
+      normalizedAreaTooltip: "100% Stacked",
+      scatterTooltip: "Scatter",
+      bubbleTooltip: "Bubble",
+      histogramTooltip: "Histogram",
+      noDataToChart: "No data available to be charted.",
+      pivotChartRequiresPivotMode: "Pivot Chart requires Pivot Mode enabled.",
+      chartSettingsToolbarTooltip: "Menu",
+      chartLinkToolbarTooltip: "Linked to Grid",
+      chartUnlinkToolbarTooltip: "Unlinked from Grid",
+      chartDownloadToolbarTooltip: "Download Chart",
+
+      // ARIA
+      ariaHidden: "hidden",
+      ariaVisible: "visible",
+      ariaChecked: "checked",
+      ariaUnchecked: "unchecked",
+      ariaIndeterminate: "indeterminate",
+      ariaColumnSelectAll: "Toggle Select All Columns",
+      ariaInputEditor: "Input Editor",
+      ariaDateFilterInput: "Date Filter Input",
+      ariaFilterInput: "Filter Input",
+      ariaFilterColumnsInput: "Filter Columns Input",
+      ariaFilterValue: "Filter Value",
+      ariaFilterFromValue: "Filter from value",
+      ariaFilterToValue: "Filter to value",
+      ariaFilteringOperator: "Filtering Operator",
+      ariaColumnToggleVisibility: "column toggle visibility",
+      ariaColumnGroupToggleVisibility: "column group toggle visibility",
+      ariaRowSelect: "Press SPACE to select this row",
+      ariaRowDeselect: "Press SPACE to deselect this row",
+      ariaRowToggleSelection: "Press Space to toggle row selection",
+      ariaRowSelectAll: "Press Space to toggle all rows selection",
+      ariaSearch: "Pretraga",
+      ariaSearchFilterValues: "Search filter values",
+    };
+     this.frameworkComponents = {
+      btnCellRenderer: BtnCellRenderer,
+    };
+  },
+
   computed: {
-    currentPage() {
-      if (this.isMounted) {
-        return this.$refs.table.currentx;
+    getTemKm: function () {
+      if (this.gridApi) {
+      this.tempKm = 0;
+
+      this.gridApi.forEachNodeAfterFilterAndSort((rowNode, index) => {
+        this.tempKm = this.tempKm + Number(rowNode.data.iznoskm);
+      });
+      return parseFloat(this.tempKm).toFixed(2)
       }
-      return 0;
+    },
+    getTempEU: function () {
+      if (this.gridApi) {
+      this.tempEU = 0;
+
+      this.gridApi.forEachNodeAfterFilterAndSort((rowNode, index) => {
+        this.tempEU = this.tempEU + Number(rowNode.data.iznoseur);
+      });
+      return parseFloat(this.tempEU).toFixed(2)
+      }
+    },
+    getTempVozila: function () {
+      if (this.gridApi) {
+        this.tempVozila = 0;
+
+        this.gridApi.forEachNodeAfterFilterAndSort((rowNode, index) => {
+          this.tempVozila = this.tempVozila + Number(rowNode.data.vozila);
+        });
+        return this.tempVozila
+      }
+    },
+    paginationPageSize() {
+      if (this.gridApi) return this.gridApi.paginationGetPageSize();
+      else return 50;
+    },
+    totalPages() {
+      if (this.gridApi) return this.gridApi.paginationGetTotalPages();
+      else return 0;
+    },
+    currentPage: {
+      get() {
+        if (this.gridApi) return this.gridApi.paginationGetCurrentPage() + 1;
+        else return 1;
+      },
+      set(val) {
+        this.gridApi.paginationGoToPage(val - 1);
+      },
     },
 
     queriedItems() {
-      return this.$refs.table
-        ? this.$refs.table.queriedResults.length
+      return this.$refs.agGridTable
+        ? this.$refs.agGridTable.queriedResults.length
         : this.products.length;
     },
   },
   methods: {
+    exportCsv() {
+      this.getTotal();
+      this.gridApi.exportDataAsCsv({
+        customFooter:
+          "\nUkupno, , , ,,," +
+          this.tempVozila +
+          "," +
+          parseFloat(this.tempKm).toFixed(2) +
+          "," +
+          parseFloat(this.tempEU).toFixed(2) +
+          "",
+      });
+    },
+    getTotal() {
+      this.tempKm = 0;
+      this.tempEU = 0;
+      this.tempVozila = 0;
+
+      this.gridApi.forEachNodeAfterFilterAndSort((rowNode, index) => {
+        console.log("node " + rowNode.data.naziv + " is in the grid");
+        this.tempKm = this.tempKm + Number(rowNode.data.iznoskm);
+        this.tempEU = this.tempEU + Number(rowNode.data.iznoseur);
+        this.tempVozila = this.tempVozila + Number(rowNode.data.vozila);
+      });
+    },
+    updateSearchQuery(val) {
+      this.gridApi.setQuickFilter(val);
+    },
     getProfileImage(pictures) {
       var result = pictures.filter(function (picture) {
         return picture.type === 1;
@@ -289,6 +818,8 @@ export default {
     this.$store.dispatch("dataList/fetchDataListItems");
   },
   mounted() {
+        this.gridApi = this.gridOptions.api;
+
     this.isMounted = true;
   },
 };
