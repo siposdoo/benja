@@ -223,40 +223,6 @@
                   </vx-card>
     <vx-card>
 
-      <!-- TABLE ACTION ROW -->
-      <!--div class="flex flex-wrap justify-between items-center">
-
-        <!-- ITEMS PER PAGE -->
-        <!--div class="mb-4 md:mb-0 mr-4 ag-grid-table-actions-left">
-          <vs-dropdown vs-trigger-click class="cursor-pointer">
-            <div class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium">
-              <span class="mr-2">{{ currentPage * paginationPageSize - (paginationPageSize - 1) }} - {{ products.length - currentPage * paginationPageSize > 0 ? currentPage * paginationPageSize : products.length }} of {{ products.length }}</span>
-              <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
-            </div>
-            <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
-            <!--vs-dropdown-menu>
-
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(20)">
-                <span>20</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(50)">
-                <span>50</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(100)">
-                <span>100</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(150)">
-                <span>150</span>
-              </vs-dropdown-item>
-            </vs-dropdown-menu>
-          </vs-dropdown>
-        </div>
-
-       
-      </div-->
-       
-             
-          
        
       
 
@@ -269,48 +235,7 @@
 
         <div class="flex flex-wrap-reverse items-center">
 
-          <!-- ACTION - DROPDOWN -->
-          <!--vs-dropdown vs-trigger-click class="cursor-pointer mr-4 mb-4">
-
-            <div class="p-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer flex items-center justify-center text-lg font-medium w-32">
-              <span class="mr-2">Actions</span>
-              <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
-            </div>
-
-            <vs-dropdown-menu>
-
-              <vs-dropdown-item>
-                <span class="flex items-center">
-                  <feather-icon icon="TrashIcon" svgClasses="h-4 w-4" class="mr-2" />
-                  <span>Delete</span>
-                </span>
-              </vs-dropdown-item>
-
-              <vs-dropdown-item>
-                <span class="flex items-center">
-                  <feather-icon icon="ArchiveIcon" svgClasses="h-4 w-4" class="mr-2" />
-                  <span>Archive</span>
-                </span>
-              </vs-dropdown-item>
-
-              <vs-dropdown-item>
-                <span class="flex items-center">
-                  <feather-icon icon="FileIcon" svgClasses="h-4 w-4" class="mr-2" />
-                  <span>Print</span>
-                </span>
-              </vs-dropdown-item>
-
-              <vs-dropdown-item>
-                <span class="flex items-center">
-                  <feather-icon icon="SaveIcon" svgClasses="h-4 w-4" class="mr-2" />
-                  <span>Another Action</span>
-                </span>
-              </vs-dropdown-item>
-
-            </vs-dropdown-menu>
-          </vs-dropdown-->
-
-          <!-- ADD NEW -->
+   
           <div class="p-3 mb-4 mr-4 rounded-lg cursor-pointer flex items-center justify-between text-lg font-medium text-base  text-theme border border-solid text-theme" @click="setToken()">
               <feather-icon icon="PlusIcon" svgClasses="h-4 w-4" />
               <span  v-if="!popupActive" class="ml-2 text-base  text-theme">Dodaj novi</span>
