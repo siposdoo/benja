@@ -19,7 +19,7 @@
             @click="addNewData"
           >
             <feather-icon icon="PlusIcon" svgClasses="h-4 w-4" />
-            <span class="ml-2 text-base text-theme">Dodaj {{ getTemKm }}</span>
+            <span class="ml-2 text-base text-theme">Dodaj</span>
           </div>
           <vs-dropdown vs-trigger-click class="cursor-pointer">
             <div
