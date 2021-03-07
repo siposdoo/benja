@@ -2,22 +2,22 @@
 <template ref="content">
   <div ref="document1" id="invoice-page">
     <!-- INVOICE CONTENT -->
-    <div  v-if="products[0]"  class="p-base">
+    <div v-if="products[0]" class="p-base">
       <h3 style="text-align: center">NALOG ZA UTOVAR</h3>
       <div class="flex flex-wrap">
         <div
-           class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 bg-grid-color"
+          class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 bg-grid-color"
         >
           <div class="contact__info flex flex-col truncate w-5/6">
             <h5 class="font-semibold">Datum utovara:</h5>
             <span class="truncate">{{ products[0].datumutovara }}</span>
           </div>
         </div>
-         <div
-          class="w-full flex  justify-end sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 bg-grid-color"
+        <div
+          class="w-full flex justify-end sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 bg-grid-color"
         >
           <div class="contact__info flex flex-col truncate w-3/6">
-            <h5 style="  text-align: end;" class="font-semibold">Kamion:</h5>
+            <h5 style="text-align: end" class="font-semibold">Kamion:</h5>
             <span class="truncate">{{ products[0].kamion }}</span>
           </div>
         </div>
@@ -37,16 +37,16 @@
             >
           </div>
         </div>
-       
+
         <div
           class="w-full flex justify-end sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 bg-grid-color"
         >
           <div class="contact__info flex flex-col truncate w-3/6">
-            <h5 style="  text-align: end;"  class="font-semibold">Prikolica:</h5>
+            <h5 style="text-align: end" class="font-semibold">Prikolica:</h5>
             <span class="truncate">{{ products[0].prikolica }}</span>
           </div>
         </div>
-         <div
+        <div
           class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
         >
           <div class="contact__info flex flex-col truncate w-5/6">
@@ -77,9 +77,9 @@
                   <td>{{ utovar.grad }}</td>
                   <td>{{ utovar.drzava }}</td>
                 </tr>
-                <tr :key="index+10000">
+                <tr :key="index + 10000">
                   <td colspan="5">
-                   <div v-html="utovar.napomena" />
+                    <div v-html="utovar.napomena" />
                   </td>
                 </tr>
               </template>
@@ -109,10 +109,10 @@
                   <td>{{ utovar.grad }}</td>
                   <td>{{ utovar.drzava }}</td>
                 </tr>
-                <tr :key="index+100000">
+                <tr :key="index + 100000">
                   <td colspan="5">
                     <div v-html="utovar.napomena" />
-                   </td>
+                  </td>
                 </tr>
               </template>
             </tbody>
@@ -121,7 +121,7 @@
         <div
           class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
         >
-           <table class="table table-bordered">
+          <table class="table table-bordered">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Izvozno carinjenje</th>
@@ -137,7 +137,7 @@
         <div
           class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
         >
-           <table class="table table-bordered">
+          <table class="table table-bordered">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Granični prijelaz (špedicija)</th>
@@ -150,10 +150,10 @@
             </tbody>
           </table>
         </div>
-            <div
+        <div
           class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
         >
-           <table class="table table-bordered">
+          <table class="table table-bordered">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Uvozno carinjenje</th>
@@ -166,10 +166,10 @@
             </tbody>
           </table>
         </div>
-                 <div
+        <div
           class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
         >
-           <table class="table table-bordered">
+          <table class="table table-bordered">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Google Maps</th>
@@ -177,16 +177,18 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row"><a :href="products[0].gmaplink">{{ products[0].gmaplink }}</a></th>
+                <th scope="row">
+                  <a :href="products[0].gmaplink">{{ products[0].gmaplink }}</a>
+                </th>
               </tr>
             </tbody>
           </table>
         </div>
 
-                 <div
+        <div
           class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
         >
-           <table class="table table-bordered">
+          <table class="table table-bordered">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Napomena:</th>
@@ -194,52 +196,45 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row"> <div v-html="products[0].napomene" /></th>
+                <th scope="row"><div v-html="products[0].napomene" /></th>
               </tr>
             </tbody>
           </table>
         </div>
-      
       </div>
-          <div class="flex flex-wrap items-center justify-between">
-      <div class="flex items-center btnss">
-        <vs-button
-          class="preuzmibtn mb-base mr-3"
-          type="border"
-          icon-pack="feather"
-          icon="icon icon-download"
-          @click="downloadWithCSS"
-          >Preuzmi</vs-button
-        >
-        <vs-button
-          class="mb-base mr-3 d-none d-lg-block d-xl-block"
-          icon-pack="feather"
-          icon="icon icon-file"
-          @click="printInvoice"
-          >Printaj</vs-button
-        >
+      <div v-if="!printing" class="flex flex-wrap items-center justify-between">
+        <div class="flex items-center btnss">
+          <vs-button
+            class="preuzmibtn1 mb-base mr-3"
+            type="border"
+            icon-pack="feather"
+            icon="icon icon-download"
+            @click="generatePdf"
+            >Preuzmi</vs-button
+          >
+          <vs-button
+            class="mb-base mr-3 d-none d-lg-block d-xl-block"
+            icon-pack="feather"
+            icon="icon icon-file"
+            @click="printInvoice"
+            >Printaj</vs-button
+          >
+        </div>
       </div>
     </div>
-    </div>
-
-   
-    
- 
-
-  
-
-
-   </div>
+  </div>
 </template>
 
 <script>
 import html2pdf from "html2pdf.js";
 import VueHtml2pdf from "vue-html2pdf";
+import jsPDF from "jspdf";
 
 export default {
   data() {
     return {
       mailTo: "",
+      printing: false,
       ukupnoVozila: 0,
       products: [],
       utovari: [],
@@ -303,11 +298,28 @@ export default {
         })
         .then((response) => {
           this.products = response.data.results;
-          this.parseUtoIsto()
-         })
+          this.parseUtoIsto();
+        })
         .catch((error) => {
           console.log(error);
         });
+    },
+    generatePdf() {
+      this.printing = true;
+      let app=this
+      const doc = new jsPDF("l", "pt", "a4", false);
+      doc.html(document.body, {
+        callback: function (doc) {
+          doc.setFontSize(10);
+          doc.save();
+          app.printing = false
+        },
+        margin: [0, 0, 0, 0],
+        x: 0,
+        y: 0,
+      });
+
+      // doc.save('myPdf')
     },
     downloadWithCSS() {
       html2pdf(this.$refs.document1, {
@@ -328,39 +340,40 @@ export default {
   components: {
     VueHtml2pdf,
   },
-  created() {
-  },
+  created() {},
   beforeMount() {
-    this.getNalozi()
-
-  }
+    this.getNalozi();
+  },
 };
 </script>
 
 <style lang="scss">
+#invoice-page {
+  max-width: 791px;
+}
 [dir] p {
   margin-top: 0;
   margin-bottom: 0rem;
 }
- @media print {
-   .btnss{
-     display:none !important;
-   }
-    .thead-dark th {
-        background-color: #000 !important;
-         color: white !important;
-        -webkit-print-color-adjust: exact; 
-    }
+@media print {
+  .btnss {
+    display: none !important;
+  }
+  .thead-dark th {
+    background-color: #000 !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+  }
 }
 
 @media print {
   @page {
-  size: auto;
-  margin: 0;
-       }
-    .vendorListHeading th {
-        color: white !important;
-    }
+    size: auto;
+    margin: 0;
+  }
+  .vendorListHeading th {
+    color: white !important;
+  }
 }
 
 @page {
