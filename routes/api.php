@@ -37,8 +37,8 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('addkamion', 'KamionController@store')->middleware('auth:api');
     Route::post('updatekamion', 'KamionController@store')->middleware('auth:api');
 
-    Route::get('nalozi', 'NalogController@index');
-    Route::post('nalozi', 'NalogController@getNalog')->middleware('auth:api');
+    Route::get('nalozi', 'NalogController@index')->middleware('auth:api');
+    Route::post('nalozi', 'NalogController@getNalog');
     Route::post('addnalog', 'NalogController@store')->middleware('auth:api');
     Route::post('updatenalog', 'NalogController@store')->middleware('auth:api');
 
