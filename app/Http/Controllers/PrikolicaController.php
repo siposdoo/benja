@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Prikolica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
 
 
 class PrikolicaController extends Controller
@@ -16,8 +18,9 @@ class PrikolicaController extends Controller
      */
     public function index()
     {
-        $results = Prikolica::All();
-        
+         
+        $results = Prikolica::select("*", DB::raw("CONCAT(prikolicas.tablica,' ','(',prikolicas.name,')') as namep"))->get();
+
         return response()->json([
            
             'results' => $results

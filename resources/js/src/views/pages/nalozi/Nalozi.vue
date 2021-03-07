@@ -121,6 +121,7 @@ import moduleDataList from "@/store/data-list/moduleDataList.js";
 import { AgGridVue } from "ag-grid-vue";
 import BtnCellRenderer from "./btn-cell-renderer.js";
 import AG_GRID_LOCALE_EN from "./locale.sr.js";
+import OptionsComponent from './OptionsComponent.js'
 import moment from "moment";
 import "@sass/vuexy/extraComponents/agGridStyleOverride.scss";
 
@@ -129,7 +130,7 @@ export default {
     DataViewSidebar,
     AgGridVue,
     btnCellRenderer: BtnCellRenderer,
-  },
+   },
   data() {
     return {
       selected: [],
@@ -251,6 +252,42 @@ export default {
             applyMiniFilterWhileTyping: true,
           },
         },
+        {
+           field: 'hash',
+    headerName: 'Actions',
+    width: 250,
+    colId: 'params',
+    
+    cellRenderer: function(params){
+      let eGui = document.createElement('div');
+
+  let editingCells = params.api.getEditingCells();
+  // checks if the rowIndex matches in at least one of the editing cells
+  let isCurrentRowEditing = editingCells.some((cell) => {
+    return cell.rowIndex === params.node.rowIndex;
+  });
+
+  if (isCurrentRowEditing) {
+    eGui.innerHTML = `
+        <button  
+          class="action-button update"
+          data-action="update">
+               update  
+        </button>
+        <button  
+          class="action-button cancel"
+          data-action="cancel">
+               cancel
+        </button>
+        `;
+  } else {
+    eGui.innerHTML =  '<span class="my-css-class"><a target="_blank" href="nalog/'+params.value+'"><span class="ml-2 feather-icon select-none relative"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe w-5 h-5 hover:text-danger stroke-current"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></span></a></span>'
+
+  }
+
+  return eGui;
+    }
+        }
       ],
       frameworkComponents: null,
     };
@@ -266,8 +303,8 @@ export default {
 
       // Number Filter & Text Filter
       filterOoo: "Filter...",
-      equals: "Jednaki",
-      notEqual: "Nisu jednaki",
+      equals: "Jednak",
+      notEqual: "Nije jednak",
       empty: "Izaberi jedan",
 
       // Number Filter

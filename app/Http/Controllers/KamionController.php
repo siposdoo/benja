@@ -17,7 +17,7 @@ class KamionController extends Controller
      */
     public function index()
     {
-        $results = Kamion::select("*", DB::raw("CONCAT(kamions.proizvodjac,' ',kamions.model,'(',kamions.tablica,')') as name"))
+        $results = Kamion::select("*", DB::raw("CONCAT(kamions.tablica,' ','(',kamions.model,' ',kamions.proizvodjac,')') as name"))
         ->get();
         
         return response()->json([

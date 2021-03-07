@@ -1,302 +1,240 @@
 
-<template>
+<template ref="content">
   <div ref="document1" id="invoice-page">
-   
-      <!-- INVOICE CONTENT -->
-      <div ref="content" class="p-base">
-<h3 style="text-align:center;">NALOG ZA UTOVAR</h3>
-        <div class="p-3 vx-row p-3">
-             <div
-            v-if="products[0].vozac1"
-            class="pl-1 vx-col p-0 w-1/4 boxn-data"
-          >
-            <p class="bg-titme">Datum utovara</p>
-            <p class="bg-cont">{{ products[0].datumutovara }}</p>
+    <!-- INVOICE CONTENT -->
+    <div  v-if="products[0]"  class="p-base">
+      <h3 style="text-align: center">NALOG ZA UTOVAR</h3>
+      <div class="flex flex-wrap">
+        <div
+           class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 bg-grid-color"
+        >
+          <div class="contact__info flex flex-col truncate w-5/6">
+            <h5 class="font-semibold">Datum utovara:</h5>
+            <span class="truncate">{{ products[0].datumutovara }}</span>
           </div>
-        
-
-          <div
-            v-if="products[0].polaziste"
-            class="vx-col pl-1 p-0 w-1/4 boxn-data"
-          >
-            <p class="bg-titme">Polaziste</p>
-            <p class="bg-cont">{{ products[0].polaziste }}</p>
+        </div>
+         <div
+          class="w-full flex  justify-end sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 bg-grid-color"
+        >
+          <div class="contact__info flex flex-col truncate w-3/6">
+            <h5 style="  text-align: end;" class="font-semibold">Kamion:</h5>
+            <span class="truncate">{{ products[0].kamion }}</span>
           </div>
-           <div v-if="products[0].vozac1" class="vx-col p-0 w-1/4 boxn-data">
-            <p class="bg-titme">Vozač 1</p>
-            <p class="bg-cont">{{ products[0].vozac1 }}</p>
+        </div>
+        <div
+          class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 bg-grid-color"
+        >
+          <div class="contact__info flex flex-col truncate w-5/6">
+            <h5 v-if="products[0].vozac2 !== '-'" class="font-semibold">
+              Vozači:
+            </h5>
+            <h5 v-if="products[0].vozac2 == '-'" class="font-semibold">
+              Vozač:
+            </h5>
+            <span class="truncate">1. {{ products[0].vozac1 }}</span>
+            <span v-if="products[0].vozac2" class="truncate"
+              >2. {{ products[0].vozac2 }}</span
+            >
           </div>
-          <div
-            v-if="products[0].vozac2"
-            class="vx-col p-0 w-1/4 pl-1 boxn-data"
-          >
-            <p class="bg-titme">Vozač 2</p>
-            <p class="bg-cont">{{ products[0].vozac2 }}</p>
-          </div>
+        </div>
        
-        </div>
-
-        <div class="p-3 vx-row">
-         
-          <div
-            v-if="products[0].kamion"
-            class="vx-col p-0 w-1/4 pl-1 boxn-data"
-          >
-            <p class="bg-titme">Kamion</p>
-            <p class="bg-cont">{{ products[0].kamion }}</p>
-          </div>
-          <div
-            v-if="products[0].prikolica"
-            class="vx-col p-0 w-1/4 pl-1 boxn-data"
-          >
-            <p class="bg-titme">Prikolica</p>
-            <p class="bg-cont">{{ products[0].prikolica }}</p>
-          </div>
-            <div class="vx-col p-0 w-1/4 boxn-data">
-            <p class="bg-titme">Br. Vozila</p>
-            <p class="bg-cont">{{ ukupnoVozila }}</p>
+        <div
+          class="w-full flex justify-end sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 bg-grid-color"
+        >
+          <div class="contact__info flex flex-col truncate w-3/6">
+            <h5 style="  text-align: end;"  class="font-semibold">Prikolica:</h5>
+            <span class="truncate">{{ products[0].prikolica }}</span>
           </div>
         </div>
-        <div ref="utovar" class="vx-col w-full mt-3">
-          <h4>Utovar</h4>
-          <template lang="html">
-  <div>
-          <vs-table hoverFlat :data="invoiceData.tasks">
-            <!-- HEADER -->
-            <template slot="thead">
-              <vs-th class="pointer-events-none">#</vs-th>
-              <vs-th class="pointer-events-none">Broj vozila</vs-th>
-              <vs-th class="pointer-events-none">Adresa</vs-th>
-              <vs-th class="pointer-events-none">Grad</vs-th>
-              <vs-th class="pointer-events-none">Drzava</vs-th>
-            </template>
-
-            <!-- DATA -->
-
-            <template
-              :class="(index + 2) % 2 === 0 ? 'sverow' : ''"
-              v-for="(utovar, index) in utovari"
-            :slot-scope="data" >
-              <vs-tr
-                :class="
-                  (index + 1) % 2 === 0
-                    ? 'rowui'
-                    : '' && (index + 2) % 2 === 0
-                    ? 'prva'
-                    : ''
-                "
-                :key="utovar.id"
-              >
-                <vs-td utovar:index="">{{ index + 1 }}.</vs-td>
-                <vs-td utovar:utovar.vozila="">{{ utovar.vozila }}</vs-td>
-                <vs-td utovar:utovar.adresa="">{{ utovar.adresa }}</vs-td>
-                <vs-td utovar:utovar.grad="">{{ utovar.grad }}</vs-td>
-                <vs-td utovar:utovar.drzava="">{{ utovar.drzava }}</vs-td>
-            
-
-             
-                
-                   <template class="expand-user" slot="expand">
-                   <div>{{ utovar.napomena }}</div>
-                  </template>
-                   </vs-tr>
-             
-            </template>
-          </vs-table>
-            </div>
-</template>
-        </div>
-        <div class="vx-col w-full mt-3">
-          <h4>Istovar</h4>
-          <vs-table hoverFlat :data="invoiceData.tasks">
-            <!-- HEADER -->
-            <template slot="thead">
-              <vs-th class="pointer-events-none">#</vs-th>
-              <vs-th class="pointer-events-none">Broj vozila</vs-th>
-              <vs-th class="pointer-events-none">Adresa</vs-th>
-              <vs-th class="pointer-events-none">Grad</vs-th>
-              <vs-th class="pointer-events-none">Drzava</vs-th>
-            </template>
-
-            <!-- DATA -->
-
-            <template
-              :class="(index + 2) % 2 === 0 ? 'sverow' : ''"
-              v-for="(utovar, index) in istovari"
-            >
-              <vs-tr
-                :class="
-                  (index + 1) % 2 === 0
-                    ? 'rowui'
-                    : '' && (index + 2) % 2 === 0
-                    ? 'prva'
-                    : ''
-                "
-                :key="utovar.id"
-              >
-                <vs-td utovar:index="">{{ index + 1 }}.</vs-td>
-                <vs-td utovar:utovar.vozila="">{{ utovar.vozila }}</vs-td>
-                <vs-td utovar:utovar.adresa="">{{ utovar.adresa }}</vs-td>
-                <vs-td utovar:utovar.grad="">{{ utovar.grad }}</vs-td>
-                <vs-td utovar:utovar.drzava="">{{ utovar.drzava }}</vs-td>
-              </vs-tr>
-
-              <vs-tr
-                :class="(index + 1) % 2 === 0 ? 'rowui zadnja' : 'zadnja'"
-                :key="utovar.id+2000"
-              >
-                <vs-td colspan="5" utovar:utovar.drzava="">
-                  <feather-icon
-                    icon="AlertIcon"
-                    svgClasses="h-4 w-4"
-                  ></feather-icon
-                  >Napomena: {{ utovar.napomena }}</vs-td
-                >
-              </vs-tr>
-            </template>
-          </vs-table>
-        </div>
-        <!-- INVOICE TASKS TABLE -->
-        <div class="p-3 vx-row">
-          <div class="vx-col p-0 w-full boxn-data">
-            <p class="bg-titme">Izvozno carinjenje</p>
-            <p class="bg-cont">{{ products[0].izvoznocarinjenje }}</p>
+         <div
+          class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
+        >
+          <div class="contact__info flex flex-col truncate w-5/6">
+            <h5 class="font-semibold">Br. vozila:</h5>
+            <span class="truncate">{{ products[0].vozila }}</span>
           </div>
         </div>
-        <div class="p-3 vx-row">
-          <div class="vx-col p-0 w-full boxn-data">
-            <p class="bg-titme">Granični prijelaz (špedicija)</p>
-            <p class="bg-cont">{{ products[0].grprelaz }}</p>
-          </div>
+        <div
+          class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
+        >
+          <h5 class="font-semibold">Utovar:</h5>
+          <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Broj vozila</th>
+                <th scope="col">Adresa</th>
+                <th scope="col">Grad</th>
+                <th scope="col">Drzava</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-for="(utovar, index) in utovari">
+                <tr :key="index">
+                  <th scope="row">{{ index + 1 }}.</th>
+                  <td>{{ utovar.vozila }}</td>
+                  <td>{{ utovar.adresa }}</td>
+                  <td>{{ utovar.grad }}</td>
+                  <td>{{ utovar.drzava }}</td>
+                </tr>
+                <tr :key="index+10000">
+                  <td colspan="5">
+                   <div v-html="utovar.napomena" />
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
         </div>
-        <div class="p-3 vx-row">
-          <div class="vx-col p-0 w-full boxn-data">
-            <p class="bg-titme">Uvozno carinjenje</p>
-            <p class="bg-cont">{{ products[0].grprelaz }}</p>
-          </div>
+        <div
+          class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
+        >
+          <h5 class="font-semibold">Istovar:</h5>
+          <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Broj vozila</th>
+                <th scope="col">Adresa</th>
+                <th scope="col">Grad</th>
+                <th scope="col">Drzava</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-for="(utovar, index) in istovari">
+                <tr :key="index">
+                  <th scope="row">{{ index + 1 }}.</th>
+                  <td>{{ utovar.vozila }}</td>
+                  <td>{{ utovar.adresa }}</td>
+                  <td>{{ utovar.grad }}</td>
+                  <td>{{ utovar.drzava }}</td>
+                </tr>
+                <tr :key="index+100000">
+                  <td colspan="5">
+                    <div v-html="utovar.napomena" />
+                   </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
+        >
+           <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Izvozno carinjenje</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{ products[0].izvoznocarinjenje }}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
+        >
+           <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Granični prijelaz (špedicija)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{ products[0].grprelaz }}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+            <div
+          class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
+        >
+           <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Uvozno carinjenje</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{ products[0].uvoznocarinjenje }}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+                 <div
+          class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
+        >
+           <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Google Maps</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><a :href="products[0].gmaplink">{{ products[0].gmaplink }}</a></th>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        
-        <div class="p-3 vx-row">
-          <div class="vx-col p-0 w-full boxn-data">
-            <p class="bg-titme">Google Maps</p>
-            <p class="bg-cont">
-              <a :href="products[0].gmaplink">{{ products[0].gmaplink }}</a>
-            </p>
-          </div>
+                 <div
+          class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-4 bg-grid-color"
+        >
+           <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Napomena:</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"> <div v-html="products[0].napomene" /></th>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
-        <div class="p-3 vx-row">
-          <div class="vx-col p-0 w-full boxn-data">
-            <p class="bg-titme">Napomena</p>
-            <div class="bg-cont">{{ products[0].napomene }}</div>
-          </div>
-        </div>
-
-        
-
-        
-        <div class="flex flex-wrap items-center justify-between">
-          <div class="flex items-center">
-            <vs-button
-              class="preuzmibtn mb-base mr-3"
-              type="border"
-              icon-pack="feather"
-              icon="icon icon-download"
-              @click="downloadWithCSS"
-              >Preuzmi</vs-button
-            >
-            <vs-button
-              class="mb-base mr-3 d-none d-lg-block d-xl-block"
-              icon-pack="feather"
-              icon="icon icon-file"
-              @click="printInvoice"
-              >Printaj</vs-button
-            >
-          </div>
-        </div>
+      
       </div>
-     <div>
-     <vue-html2pdf
-        :show-layout="false"
-        :float-layout="true"
-        :enable-download="true"
-        :preview-modal="true"
-        :paginate-elements-by-height="1400"
-        filename="hee hee"
-        :pdf-quality="2"
-        :manual-pagination="false"
-        pdf-format="a4"
-        pdf-orientation="landscape"
-        pdf-content-width="800px"
+          <div class="flex flex-wrap items-center justify-between">
+      <div class="flex items-center btnss">
+        <vs-button
+          class="preuzmibtn mb-base mr-3"
+          type="border"
+          icon-pack="feather"
+          icon="icon icon-download"
+          @click="downloadWithCSS"
+          >Preuzmi</vs-button
+        >
+        <vs-button
+          class="mb-base mr-3 d-none d-lg-block d-xl-block"
+          icon-pack="feather"
+          icon="icon icon-file"
+          @click="printInvoice"
+          >Printaj</vs-button
+        >
+      </div>
+    </div>
+    </div>
 
-        @progress="onProgress($event)"
-        @hasStartedGeneration="hasStartedGeneration()"
-        @hasGenerated="hasGenerated($event)"
-        ref="html2Pdf"
-    >
-        <section slot="pdf-content">
-           <div class="vx-col w-full mt-3">
-          <h4>Istovar</h4>
-          <vs-table hoverFlat :data="invoiceData.tasks">
-            <!-- HEADER -->
-            <template slot="thead">
-              <vs-th class="pointer-events-none">#</vs-th>
-              <vs-th class="pointer-events-none">Broj vozila</vs-th>
-              <vs-th class="pointer-events-none">Adresa</vs-th>
-              <vs-th class="pointer-events-none">Grad</vs-th>
-              <vs-th class="pointer-events-none">Drzava</vs-th>
-            </template>
+   
+    
+ 
 
-            <!-- DATA -->
-
-            <template
-              :class="(index + 2) % 2 === 0 ? 'sverow' : ''"
-              v-for="(utovar, index) in istovari"
-            >
-              <vs-tr
-                :class="
-                  (index + 1) % 2 === 0
-                    ? 'rowui'
-                    : '' && (index + 2) % 2 === 0
-                    ? 'prva'
-                    : ''
-                "
-                :key="utovar.id"
-              >
-                <vs-td utovar:index="">{{ index + 1 }}.</vs-td>
-                <vs-td utovar:utovar.vozila="">{{ utovar.vozila }}</vs-td>
-                <vs-td utovar:utovar.adresa="">{{ utovar.adresa }}</vs-td>
-                <vs-td utovar:utovar.grad="">{{ utovar.grad }}</vs-td>
-                <vs-td utovar:utovar.drzava="">{{ utovar.drzava }}</vs-td>
-              </vs-tr>
-
-              <vs-tr
-                :class="(index + 1) % 2 === 0 ? 'rowui zadnja' : 'zadnja'"
-                :key="utovar.id+2000"
-              >
-                <vs-td colspan="5" utovar:utovar.drzava="">
-                  <feather-icon
-                    icon="AlertIcon"
-                    svgClasses="h-4 w-4"
-                  ></feather-icon
-                  >Napomena: {{ utovar.napomena }}</vs-td
-                >
-              </vs-tr>
-            </template>
-          </vs-table>
-        </div>
-        </section>
-    </vue-html2pdf>
-   </div>
-  </div>
   
+
+
+   </div>
 </template>
 
 <script>
- 
 import html2pdf from "html2pdf.js";
-import VueHtml2pdf from 'vue-html2pdf'
+import VueHtml2pdf from "vue-html2pdf";
 
 export default {
   data() {
@@ -356,7 +294,7 @@ export default {
     },
     getNalozi() {
       this.$http
-        .get("/api/auth/nalozi", {
+        .post("/api/auth/nalozi", {
           hsh: this.$route.params.nalogId,
 
           headers: {
@@ -365,19 +303,18 @@ export default {
         })
         .then((response) => {
           this.products = response.data.results;
-          console.log(this.products);
-          this.parseUtoIsto();
-        })
+          this.parseUtoIsto()
+         })
         .catch((error) => {
           console.log(error);
         });
     },
     downloadWithCSS() {
-      html2pdf(this.$refs.document1, {
+      html2pdf(this.$refs.content, {
         margin: 1,
         filename: "nalog-" + this.$route.params.nalogId + ".pdf",
         image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { dpi: 192, letterRendering: true },
+        html2canvas: { dpi: 192, letterRendering: false },
         jsPDF: { unit: "cm", format: "letter", orientation: "landscape" },
       });
     },
@@ -388,12 +325,15 @@ export default {
       window.print();
     },
   },
-    components: {
-        VueHtml2pdf
-    },
-  created() {
-    this.getNalozi();
+  components: {
+    VueHtml2pdf,
   },
+  created() {
+  },
+  beforeMount() {
+    this.getNalozi()
+
+  }
 };
 </script>
 
@@ -402,33 +342,25 @@ export default {
   margin-top: 0;
   margin-bottom: 0rem;
 }
+ @media print {
+   .btnss{
+     display:none !important;
+   }
+    .thead-dark th {
+        background-color: #000 !important;
+         color: white !important;
+        -webkit-print-color-adjust: exact; 
+    }
+}
+
 @media print {
-  .invoice-page {
-    * {
-      visibility: hidden;
+  @page {
+  size: auto;
+  margin: 0;
+       }
+    .vendorListHeading th {
+        color: white !important;
     }
-
-    #content-area {
-      margin: 0 !important;
-    }
-
-    .vs-con-table {
-      .vs-con-tbody {
-        overflow: hidden !important;
-      }
-    }
-
-    #invoice-container,
-    #invoice-container * {
-      visibility: visible;
-    }
-    #invoice-container {
-      position: absolute;
-      left: 0;
-      top: 0;
-      box-shadow: none;
-    }
-  }
 }
 
 @page {

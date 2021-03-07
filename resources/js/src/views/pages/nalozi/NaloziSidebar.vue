@@ -133,8 +133,8 @@
               placeholder="npr. Prikolica plava"
               class="w-full"
               v-model="nalogdata.prikolica"
-              display-attribute="name"
-              value-attribute="name"
+              display-attribute="namep"
+              value-attribute="namep"
               :list="prikolice"
             >
             </vue-simple-suggest>
@@ -293,12 +293,38 @@
 
             <div class="vx-col w-10/12">
               <label for="datepicker-lg">Napomena</label>
-              <vs-textarea
-                v-model="input.napomena"
+               <quill-editor
+                :options="editorOption1"
                 placeholder="Reference, vozilo, broj šasije, tablice"
                 class="w-full"
                 v-validate="'required'"
-              />
+                v-model="input.napomena"
+              >
+                <div id="toolbar1" slot="toolbar">
+                  <!-- Add a bold button -->
+                  <button class="ql-bold">Bold</button>
+                  <button class="ql-italic">Italic</button>
+
+                  <!-- Add font size dropdown -->
+                  <select class="ql-size">
+                    <option value="small"></option>
+                    <!-- Note a missing, thus falsy value, is used to reset to default -->
+                    <option selected></option>
+                    <option value="large"></option>
+                    <option value="huge"></option>
+                  </select>
+
+                  <select class="ql-font">
+                    <option selected="selected"></option>
+                    <option value="serif"></option>
+                    <option value="monospace"></option>
+                  </select>
+
+                  <!-- Add subscript and superscript buttons -->
+                  <button class="ql-script" value="sub"></button>
+                  <button class="ql-script" value="super"></button>
+                </div>
+              </quill-editor>
             </div>
             <div class="vx-col w-2/12">
               <vs-button
@@ -431,14 +457,40 @@
               v-validate="'required'"
             />
           </div>
-          <div class="vx-col w-full">
-            <vs-textarea
-              label="Napomene"
-              v-model="nalogdata.napomene"
-              placeholder="Dodatne napomene"
-              class="mt-5 w-full"
-              v-validate="'required'"
-            />
+          <div class="mt-2 vx-col w-full">
+             <label for="datepicker-lg">Dodatne napomene</label>
+            <quill-editor
+                :options="editorOption2"
+                placeholder="Dodatne napomene"
+                class="w-full"
+                v-validate="'required'"
+                v-model="nalogdata.napomene"
+              >
+                <div id="toolbar2" slot="toolbar">
+                  <!-- Add a bold button -->
+                  <button class="ql-bold">Bold</button>
+                  <button class="ql-italic">Italic</button>
+
+                  <!-- Add font size dropdown -->
+                  <select class="ql-size">
+                    <option value="small"></option>
+                    <!-- Note a missing, thus falsy value, is used to reset to default -->
+                    <option selected></option>
+                    <option value="large"></option>
+                    <option value="huge"></option>
+                  </select>
+
+                  <select class="ql-font">
+                    <option selected="selected"></option>
+                    <option value="serif"></option>
+                    <option value="monospace"></option>
+                  </select>
+
+                  <!-- Add subscript and superscript buttons -->
+                  <button class="ql-script" value="sub"></button>
+                  <button class="ql-script" value="super"></button>
+                </div>
+              </quill-editor>
             <span class="text-danger text-sm" v-show="errors.has('napomene')">{{
               errors.first("napomene")
             }}</span>
@@ -503,6 +555,17 @@ export default {
           toolbar: "#toolbar",
         },
       },
+        editorOption1: {
+        modules: {
+          toolbar: "#toolbar1",
+        },
+      },
+        editorOption2: {
+        modules: {
+          toolbar: "#toolbar2",
+        },
+      },
+      
       value: "",
       formatted: "",
       kontaktiLista: [],
