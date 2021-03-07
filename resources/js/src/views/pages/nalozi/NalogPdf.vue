@@ -356,6 +356,9 @@ export default {
   margin-bottom: 0rem;
 }
 @media print {
+  #invoice-page {
+  max-width: 1280px;
+}
   .btnss {
     display: none !important;
   }
