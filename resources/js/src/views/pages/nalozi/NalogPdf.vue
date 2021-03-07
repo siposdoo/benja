@@ -310,11 +310,11 @@ export default {
         });
     },
     downloadWithCSS() {
-      html2pdf(this.$refs.content, {
+      html2pdf(this.$refs.document1, {
         margin: 1,
         filename: "nalog-" + this.$route.params.nalogId + ".pdf",
         image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { dpi: 192, letterRendering: false },
+        html2canvas: { dpi: 192, letterRendering: true },
         jsPDF: { unit: "cm", format: "letter", orientation: "landscape" },
       });
     },
