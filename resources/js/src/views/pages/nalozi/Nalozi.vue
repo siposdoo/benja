@@ -81,7 +81,7 @@
           class="flex flex-wrap items-center justify-end ag-grid-table-actions-right"
         >
         
-           <vs-button v-if="product" @click="editData()" class="vs-component vs-button mr-3 vs-button-warning vs-button-borderbtn-sm" 
+           <vs-button v-if="product" @click="editData()" class="vs-component vs-button ml-3 vs-button-warning vs-button-borderbtn-sm" 
             >Izmjeni</vs-button
           >
         </div>
