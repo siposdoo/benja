@@ -74,15 +74,27 @@
             >Izvezi kao CSV</vs-button
           >
         </div>
+        
       </div>
+      
+   <div
+          class="flex flex-wrap items-center justify-end ag-grid-table-actions-right"
+        >
+        
+           <vs-button v-if="product" @click="editData()" class="vs-component vs-button mr-3 vs-button-warning vs-button-borderbtn-sm" 
+            >Izmjeni</vs-button
+          >
+        </div>
       <ag-grid-vue
+      
         ref="agGridTable"
         :gridOptions="gridOptions"
         class="ag-theme-material w-100 my-4 ag-grid-table"
         :columnDefs="columnDefs"
         :defaultColDef="defaultColDef"
+        rowSelection="single"
+        @selection-changed="onSelectionChanged"
         :rowData="products"
-        rowSelection="multiple"
         colResizeDefault="shift"
         :animateRows="true"
         :floatingFilter="true"
@@ -135,6 +147,7 @@ export default {
     return {
       selected: [],
       products: [],
+      product:null,
       tempKm: 0,
       tempEU: 0,
       tempVozila: 0,
@@ -254,7 +267,7 @@ export default {
         },
         {
            field: 'hash',
-    headerName: 'Actions',
+    headerName: 'Akcije',
     width: 250,
     colId: 'params',
     
@@ -282,7 +295,7 @@ export default {
         `;
   } else {
     eGui.innerHTML =  '<span class="my-css-class"><a target="_blank" href="nalog/'+params.value+'"><span class="ml-2 feather-icon select-none relative"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe w-5 h-5 hover:text-danger stroke-current"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></span></a></span>'
-
+ 
   }
 
   return eGui;
@@ -621,6 +634,14 @@ export default {
     },
   },
   methods: {
+    filt: function() {
+      alert("vvassds")
+    },
+    onSelectionChanged() {
+      var selectedRows = this.gridApi.getSelectedRows();
+      this.product=selectedRows
+      console.log(this.product)
+    },
     exportCsv() {
       this.getTotal();
       this.gridApi.exportDataAsCsv({
@@ -683,9 +704,9 @@ export default {
         console.error(err);
       });
     },
-    editData(data) {
+    editData() {
       // this.sidebarData = JSON.parse(JSON.stringify(this.blankData))
-      this.sidebarData = data;
+      this.sidebarData = this.product[0];
       this.toggleDataSidebar(true);
     },
     getOrderStatusColor(status) {
@@ -717,6 +738,11 @@ export default {
     this.$store.dispatch("dataList/fetchDataListItems");
   },
   mounted() {
+     let spans = document.querySelectorAll('span');
+
+    spans.forEach(el => {
+      el.addEventListener('click', this.editData);
+    })
         this.gridApi = this.gridOptions.api;
 
     this.isMounted = true;
