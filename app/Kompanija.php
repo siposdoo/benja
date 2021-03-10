@@ -8,6 +8,7 @@ class Kompanija extends Model
 {
     public function nalog()
     {
-        return $this->belongsTo('App\Models\Nalog', 'kompanija');
+        return $this->hasMany('App\Nalog', 'kompanija');
     }
+    
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kompanija;
+use App\Nalog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,7 +17,7 @@ class KompanijaController extends Controller
      */
     public function index()
     {
-        $kompanija = Kompanija::All();
+        $kompanija = Kompanija::with('nalog')->with('nalog.utovaristovar')->get();
         
         return response()->json([
            
