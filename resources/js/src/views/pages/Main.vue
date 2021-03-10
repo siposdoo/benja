@@ -268,8 +268,7 @@ export default {
           cellRenderer: function (params) {
             let a = [];
             a = params.data.city.split(" ");
-            console.log(a);
-            return a[1];
+             return a[1];
           },
         },
         {
@@ -450,8 +449,7 @@ return moment(date).format("L", "sr")
       this.center.lat = parseFloat(selectedRows[0].lat);
       this.toggleInfoWindow(selectedRows[0]);
       this.zoom = 8;
-      console.log(selectedRows[0]);
-    },
+     },
     infoOptionsSort() {
       this.utovari = [];
       this.istovari = [];
