@@ -171,7 +171,7 @@
             :opened="infoWinOpen"
             @closeclick="infoWinOpen = false"
           >
-            <h5>{{ contentInfo }}</h5>
+            <h5>{{ contentInfo }}{{ getKompanijeTemp }}</h5>
             <h5>Naloga:{{ currMarker.nalozi.length }}</h5>
             <h6>Utovari:{{ currMarker.utovara }}</h6>
             <h6>Istovari:{{ currMarker.istovara }}</h6>
